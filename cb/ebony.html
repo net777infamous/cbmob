@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video.js Player</title>
+    <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/7.14.3/video.js"></script>
+    <style>
+        #container {
+            position: relative;
+    top: 50%;
+            display: flex;
+            height: 85vh;
+            flex-direction: column; /
+        }
+        body {
+    background-color: black;
+}
+        #videoPlayer {
+            flex: 1;
+            padding: 3px;
+        }
+
+        .video-js {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        #otherContent {
+            flex: 1;
+            background-color: black;
+            overflow-y: auto;
+        }
+
+        #usernameContainer {
+            padding: 10px;
+            color: white;
+            background-color: black;
+            
+        }
+
+        #pageNumber {
+            color: white; /* Set the color to white */
+        }
+
+        .clickable {
+            cursor: pointer;
+            text-decoration: underline;
+            margin-bottom: 10px;
+            display: inline-block;
+            /*width: 20%;*/
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .thumbnail {
+            display: block;
+            width: 185px;
+            height: 170px;
+            background-size: cover;
+            margin-bottom: 5px;
+        }
+
+        .previous-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 15px 100px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.next-button {
+    background-color: #28A745;
+    color: white;
+    border: none;
+    padding: 15px 100px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.page-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 15px 100px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.page-number {
+    font-size: 25px; /* Adjust the font size for the number */
+}
+
+
+
+
+    </style>
+    <script>
+        var offset = 0;
+        var pagex = 1;
+
+        function getJSON(offset) {
+            fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&tag=ebony&gender=f&offset=${offset}`)
+
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    var usernames = data.results.map(function(result) {
+                        return result.username;
+                    });
+                    var usernameElement = document.getElementById('username');
+                    usernameElement.innerHTML = usernames.map(function(username) {
+                        var fontSize = (username.length > 10) ? '12px' : '18px';
+                        return `
+                            <div class="clickable">
+                                <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+                                <div style="font-size: ${fontSize};">${username}</div>
+                            </div>`;
+                    }).join("");
+
+                    var videoElement = document.getElementById('myVideo');
+                    var player = videojs(videoElement);
+
+                    var usernameDivs = usernameElement.getElementsByClassName('clickable');
+                    for (var i = 0; i < usernameDivs.length; i++) {
+                        var div = usernameDivs[i];
+                        div.addEventListener('click', function(event) {
+                            var clickedUsername = event.currentTarget.textContent.trim();
+                            player.src([{
+                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
+                                type: 'application/x-mpegURL'
+                            }]);
+                            player.play();
+                        });
+                    }
+                })
+                .catch(function(error) {
+                    console.log('Error:', error);
+                });
+        }
+        
+        function previous() {
+            offset -= 19;
+            pagex -= 1;
+            if (pagex < 1) {
+                pagex = 1
+            }
+            
+            console.log("page no "+pagex)
+            updatePageNumber();
+            if (offset < 0) {
+                offset = 0;
+            }
+            clearUsernames();
+            getJSON(offset);
+        }
+        
+        function next() {
+            offset += 20;
+            pagex += 1;
+            console.log("page no "+pagex)
+            updatePageNumber();
+            clearUsernames
+            clearUsernames();
+            getJSON(offset);
+        }
+        function updatePageNumber() {
+            var pageNumberElement = document.getElementById('pageNumber');
+            pageNumberElement.textContent = `(${pagex})`;
+        }
+        
+        function clearUsernames() {
+            var usernameElement = document.getElementById('username');
+            usernameElement.innerHTML = "";
+        }
+        function redirectToOtherPage() {
+            var currentPage = window.location.href;
+
+            if (currentPage === "http://192.168.8.110/cb/default.html") {
+                window.location.href = "http://192.168.8.110/cb/ebony.html";
+            } else {
+                window.location.href = "http://192.168.8.110/cb/default.html";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            getJSON(offset);
+        });
+
+        let touchstartX = 0;
+let touchendX = 0;
+
+document.addEventListener("touchstart", function(event) {
+    touchstartX = event.touches[0].clientX;
+});
+
+document.addEventListener("touchend", function(event) {
+    touchendX = event.changedTouches[0].clientX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const threshold = 50;
+    const deltaX = touchstartX - touchendX;
+
+    if (deltaX > threshold) {
+        next(); // Right swipe (next function)
+    } else if (-deltaX > threshold) {
+        previous(); // Left swipe (previous function)
+    }
+}
+    </script>
+</head>
+<body>
+
+    <div id="container">
+        <div id="videoPlayer">
+            <video id="myVideo" class="video-js vjs-default-skin" controls preload="auto" muted autoplay>
+                <source src="monkeylina.mp4"></source>
+            </video>
+        </div>
+        <div id="otherContent">
+            <div id="usernameContainer">
+                <div id="username"></div>
+            </div>
+            <!-- Add your other content here -->
+        </div>
+    </div>
+    <button class="previous-button" onclick="previous()">Previous</button>
+<button class="next-button" onclick="next()">Next</button>
+
+    <div class="page-number" id="pageNumber" style="color: white; display: inline-block; margin-left: 15px; margin-right: 15px;">(1)</div>
+    <button class="page-button" onclick="redirectToOtherPage()">Other</button>
+</body>
+</html>
+
