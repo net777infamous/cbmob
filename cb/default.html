@@ -141,11 +141,11 @@
             var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
              divElement.innerHTML = '';
-             divElement.innerHTML = usernames.map(function(username) {
+             divElement.innerHTML = locations.map(function(location) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
                 return `
                     <div class="clickable">
-                        <div style="font-size: ${fontSize};">${username}</div>
+                        <div style="font-size: ${fontSize};">${location}</div>
                     </div>`;
             }).join("");
             
