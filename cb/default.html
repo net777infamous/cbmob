@@ -237,6 +237,9 @@ window.onload = function() {
     const volumeSlider = document.getElementById('volumeSlider');
 
     volumeSlider.addEventListener('input', function() {
+        var videoElement = document.getElementById('myVideo');
+var player = videojs(videoElement);
+        player.muted(false);
 
         player.volume(volumeSlider.value);
     });
