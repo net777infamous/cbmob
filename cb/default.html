@@ -261,10 +261,10 @@ var player = videojs(videoElement);
 const muteButton = document.getElementById('muteButton');
 
 
-    if (muteButton.textContent = 'Mute') {
+    if (muteButton.textContent == 'Mute') {
         player.muted(true);
         muteButton.textContent = 'Unmute';
-    } if (muteButton.textContent = 'Unmute') {
+    } else if (muteButton.textContent == 'Unmute') {
         player.muted(false);
         player.volume(volumeSlider.value);
         muteButton.textContent = 'Mute';
