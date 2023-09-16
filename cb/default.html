@@ -206,7 +206,7 @@ var countsArray = data.results.map(function(username, index) {
 
                   //  divElement.innerHTML ='location:  '+ clickedLocation +'                                                 followers:  '+xfollow;
                     
-divElement.innerHTML = clickedUsername +'     '+xfollow + '     '+clickedLoc
+divElement.innerHTML = clickedUsername +'     '+xfollow + '     '+clickedLoc.slice(0, 12)
 
 
 /*
@@ -515,6 +515,7 @@ const muteButton = document.getElementById('muteButton');
         <option value="office">office</option>
         <option value="lesbians">lesbians</option>
         <option value="masturbate">masturbate</option>
+        <option value="bigass">bigass</option>
 </select>
  <!-- <button class="next-button" onclick="next()">Like</button> -->
 
