@@ -135,7 +135,7 @@
             });
             
             var locations = data.results.map(function(result) {
-                return result.location;
+                return result.num_followers;
             });
 
             var usernameElement = document.getElementById('username');
@@ -144,7 +144,7 @@
              divElement.innerHTML = locations.map(function(location) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
                 return `
-                    <div class="clickable">
+                    <div class="xlickable">
                         <div style="font-size: ${fontSize};">${location}</div>
                     </div>`;
             }).join("");
@@ -160,6 +160,8 @@
 
             var videoElement = document.getElementById('myVideo');
             var player = videojs(videoElement);
+
+             var locationDivs = divElement.getElementsByClassName('xlickable');
 
             var usernameDivs = usernameElement.getElementsByClassName('clickable');
             for (var i = 0; i < usernameDivs.length; i++) {
