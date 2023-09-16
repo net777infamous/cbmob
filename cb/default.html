@@ -244,8 +244,9 @@ fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
     data.results.forEach(result => {
-alert(result.username)
-    }
+      alert(result.username);
+    });
+  }); 
 
     
     var videoElement = document.getElementById('myVideo');
