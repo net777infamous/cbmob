@@ -315,7 +315,17 @@ const muteButton = document.getElementById('muteButton');
     }
   //  isMuted = !isMuted;
 }
+function slide() {
+       var videoElement = document.getElementById('myVideo');
+var player = videojs(videoElement);
+const muteButton = document.getElementById('muteButton');
 
+    if (muteButton.textContent == 'Unmute') {
+        player.muted(false);
+        player.volume(volumeSlider.value);
+        muteButton.textContent = 'Mute';
+    }
+}
 
     </script>
 </head>
@@ -342,7 +352,7 @@ const muteButton = document.getElementById('muteButton');
      <button class="mute-button"  id="muteButton" onclick="toggleMute()">Unmute</button>
 
       <div id="volumeControl">
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.2">
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.2" onclick="slide()">
     </div>
     
 </body>
