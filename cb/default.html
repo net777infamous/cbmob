@@ -239,6 +239,7 @@ window.onload = function() {
     volumeSlider.addEventListener('input', function() {
   if (player.muted()) {
         player.muted(false);
+      player.play();
     }
 
         player.volume(volumeSlider.value);
