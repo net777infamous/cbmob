@@ -15,6 +15,16 @@
         body {
     background-color: black;
 }
+        .vjs-control-bar {
+    opacity: 1 !important; /* Ensure full opacity */
+    transition: none !important; /* Remove any transition effect */
+    pointer-events: auto !important; /* Allow interaction */
+}
+
+/* Keep all control bar elements visible */
+.vjs-control {
+    display: block !important;
+}
         #videoPlayer {
             flex: 1;
             padding: 3px;
