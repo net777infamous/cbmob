@@ -138,6 +138,13 @@
                 return result.location;
             });
 
+            var nfollowers = data.results.map(function(result) {
+                return result.num_followers;
+            });
+
+            var count = data.count;
+            });
+
             var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
             
@@ -146,7 +153,7 @@
             usernameElement.innerHTML = usernames.map(function(username, index) {
     var fontSize = (username.length > 10) ? '12px' : '18px';
     return `
-        <div class="clickable" data-location="${locations[index]}" userinfo="${username}">
+        <div class="clickable" data-location="${locations[index]}" userinfo="${username}" vcount="${count[index]}">
             <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
             <div style="font-size: ${fontSize};">${username}</div>
             <div style="display: none;">${locations[index]}</div>
@@ -167,12 +174,14 @@
                   //  var clickedUsername = event.currentTarget.textContent.trim();
 
                     var clickedUsername = event.currentTarget.getAttribute('userinfo');
+
+                    var xviews = event.currentTarget.getAttribute('vcount');
                     divElement.innerHTML = '';
 
 
                     var clickedLocation = event.currentTarget.getAttribute('data-location');
 
-                    divElement.innerHTML = clickedLocation
+                    divElement.innerHTML = clickedLocation +'    '+xviews
        // alert( clickedUsername +'   '+ `Location for ${clickedUsername}: ${clickedLocation}`);
                    
 
