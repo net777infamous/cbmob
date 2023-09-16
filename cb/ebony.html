@@ -261,6 +261,7 @@ const muteButton = document.getElementById('muteButton');
         muteButton.textContent = 'Unmute';
     } else {
         player.muted(false);
+        player.volume(volumeSlider.value);
         muteButton.textContent = 'Mute';
     }
     isMuted = !isMuted;
@@ -290,7 +291,7 @@ const muteButton = document.getElementById('muteButton');
     <button class="page-button" onclick="redirectToOtherPage()">Other</button>
       <button class="mute-button"  id="muteButton" onclick="toggleMute()">Unmute</button>
     <div id="volumeControl">
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.2">
     </div>
 </body>
 </html>
