@@ -235,14 +235,14 @@ function handleSwipe() {
         previous(); // Left swipe (previous function)
     }
 }
-
+const volumeSlider = document.getElementById('volumeSlider');
 window.onload = function() {
 starty()
 }
         function starty() {
        var videoElement = document.getElementById('myVideo');
     var player = videojs(videoElement); 
-    const volumeSlider = document.getElementById('volumeSlider');
+    
     volumeSlider.value = 0.15;
 const muteButton = document.getElementById('muteButton');
 
