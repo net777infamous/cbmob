@@ -147,7 +147,11 @@
                  
             });
 var count = data.count;
-var countsArray = Array(usernames.length).fill(count);
+
+var countsArray = Array(data.results.length).fill(count);
+
+
+            
             alert(countsArray)
 
             var usernameElement = document.getElementById('username');
