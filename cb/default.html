@@ -230,9 +230,10 @@ function handleSwipe() {
         previous(); // Left swipe (previous function)
     }
 }
-var videoElement = document.getElementById('myVideo');
-    var player = videojs(videoElement); 
+
 window.onload = function() {
+    var videoElement = document.getElementById('myVideo');
+    var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
 const muteButton = document.getElementById('muteButton');
     volumeSlider.addEventListener('input', function() {
@@ -240,9 +241,17 @@ const muteButton = document.getElementById('muteButton');
      player.muted(false);
         player.volume(volumeSlider.value);
         muteButton.textContent = 'Mute';
+      if (player.paused()) {
+                player.play();
+            }
+
     }
  else if (muteButton.textContent == 'Mute') {
         player.volume(volumeSlider.value);
+     if (player.paused()) {
+                player.play();
+            }
+
 }
     });
 };
