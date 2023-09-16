@@ -391,8 +391,8 @@ starty()
         tagsArray.forEach(function (tag) {
              var selectElement = document.getElementById("mobFavDropdown");
     var option = document.createElement("option");
-    option.value = tag.slice(1); // Remove the '#' from the tag
-    option.textContent = tag;
+    option.value = tag.slice(1); 
+    option.textContent = tag.slice(1);
     selectElement.appendChild(option);
 });
 
@@ -523,9 +523,10 @@ const muteButton = document.getElementById('muteButton');
        <div style="display: flex; align-items: center;">
      <!--  <button class="previous-button" onclick="previous()">Tags</button> -->
     <select id="mobFavDropdown">
-  <option value="ebony">ebony</option>
+  <!--  <option value="ebony">ebony</option>
   <option value="gaming">gaming</option>
   <option value="bbw">bbw</option>
+        
         <option value="latina">latina</option>
         <option value="goth">goth</option>
         <option value="18">18</option>
@@ -533,7 +534,7 @@ const muteButton = document.getElementById('muteButton');
         <option value="office">office</option>
         <option value="lesbians">lesbians</option>
         <option value="masturbate">masturbate</option>
-        <option value="bigass">bigass</option>
+        <option value="bigass">bigass</option> -->
 </select>
  <!-- <button class="next-button" onclick="next()">Like</button> -->
 
