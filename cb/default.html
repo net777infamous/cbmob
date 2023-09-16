@@ -135,11 +135,15 @@
 
         var counts = [];
 
-     function getJSON(offset) {
+     function getJSON(offset, tag) {
          
+let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}`;
 
-         
-    fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}`)
+    if (tag) {
+        url += `&tag=${encodeURIComponent(tag)}`;
+    }
+        
+    fetch(url)
         .then(function(response) {
             return response.json();
         })
@@ -388,7 +392,9 @@ var dropdown = document.getElementById('mobFavDropdown');
 
 const muteButton = document.getElementById('muteButton');
 dropdown.addEventListener('change', function() {
+     var selectedOption = dropdown.options[dropdown.selectedIndex].text;
 clearUsernames();
+    function getJSON(0, selectedOption)
 });
             
     var playerContainer = player.el();
