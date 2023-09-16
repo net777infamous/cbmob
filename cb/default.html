@@ -134,15 +134,7 @@
                     var usernames = data.results.map(function(result) {
                         return result.username;
                     });
-
-                    var locations = data.results.map(function(result) {
-            return result.location;
-        });
-
-                         var nfollowers = data.results.map(function(result) {
-            return result.num_followers;
-        });
-                
+ 
                     var usernameElement = document.getElementById('username');
                     usernameElement.innerHTML = usernames.map(function(username) {
                         var fontSize = (username.length > 10) ? '12px' : '18px';
@@ -162,9 +154,15 @@
                         div.addEventListener('click', function(event) {
                             var clickedUsername = event.currentTarget.textContent.trim();
 var divElement = document.getElementById("myDiv");
+
+                             fetchLocationAndFollowers(clickedUsername)
+        .then(function(data) {
+            var location = data.location;
+            var nfollowers = data.num_followers;
        divElement.innerHTML = '';
                            divElement.innerHTML = clickedUsername + '   ' +locations.slice(0, 10) +'   '+nfollowers
 
+        })
 
                             player.src([{
                                 src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
