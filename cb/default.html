@@ -203,6 +203,21 @@ divElement.innerHTML = clickedUsername
         });
 }
 
+           function previous2() {
+           offset -= 19;
+            pagex -= 1;
+            if (pagex < 1) {
+                pagex = 1
+            }
+            
+            console.log("page no "+pagex)
+            updatePageNumber();
+            if (offset < 0) {
+                offset = 0;
+            }
+            clearUsernames();
+            getJSON(offset); 
+           }
 
         
         function previous() {
@@ -238,7 +253,20 @@ divElement.innerHTML = clickedUsername
         option.text = 'mobFav is empty.';
         dropdown.add(option);
     }
+            
         }
+
+             function next2() {
+            
+            offset += 20;
+            pagex += 1;
+            console.log("page no "+pagex)
+            updatePageNumber();
+            clearUsernames
+            clearUsernames();
+            getJSON(offset);
+            
+             }
         
         function next() {
             /*
@@ -314,9 +342,9 @@ function handleSwipe() {
     const deltaX = touchstartX - touchendX;
 
     if (deltaX > threshold) {
-        next(); // Right swipe (next function)
+        next2(); // Right swipe (next function)
     } else if (-deltaX > threshold) {
-        previous(); // Left swipe (previous function)
+        previous2(); // Left swipe (previous function)
     }
 }
 
