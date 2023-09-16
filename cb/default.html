@@ -152,6 +152,8 @@
                         var div = usernameDivs[i];
                         div.addEventListener('click', function(event) {
                             var clickedUsername = event.currentTarget.textContent.trim();
+var divElement = document.getElementById("myDiv");
+        divElement.innerHTML = clickedUsername;
                             player.src([{
                                 src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
                                 type: 'application/x-mpegURL'
