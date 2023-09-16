@@ -265,9 +265,15 @@ fetch(apiUrl)
         player.muted(false);
       player.volume(volumeSlider.value);
       player.play();
+        if (player.paused()) {
+                player.play();
+            }
     }
 
         player.volume(volumeSlider.value);
+          if (player.paused()) {
+                player.play();
+            }
     });
 };
 
