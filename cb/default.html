@@ -206,7 +206,7 @@ divElement.innerHTML = clickedUsername
 
         
         function previous() {
-            offset -= 19;
+         /*   offset -= 19;
             pagex -= 1;
             if (pagex < 1) {
                 pagex = 1
@@ -218,7 +218,15 @@ divElement.innerHTML = clickedUsername
                 offset = 0;
             }
             clearUsernames();
-            getJSON(offset);
+            getJSON(offset); */
+
+             var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
+    
+    if (mobArr.length > 0) {
+        alert('Contents of mobFav:\n' + mobArr.join('\n'));
+    } else {
+        alert('mobFav is empty.');
+    }
         }
         
         function next() {
@@ -232,10 +240,21 @@ divElement.innerHTML = clickedUsername
             getJSON(offset);
             */
 
-
-            var divElement = document.getElementById("myDiv");
-            
-            alert(divElement.innerHTML)
+  var divElement = document.getElementById('myDiv');
+    var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
+ar likeButton = document.querySelector('.next-button');
+    if (!mobArr.includes(divElement.innerHTML)) {
+        mobArr.push(divElement.innerHTML);
+        localStorage.setItem('mobFav', mobArr.join(','));
+        likeButton.textContent = 'Unlike';
+    } else {
+        const index = mobArr.indexOf(divElement.innerHTML);
+        if (index !== -1) {
+            mobArr.splice(index, 1);
+            localStorage.setItem('mobFav', mobArr.join(','));
+            likeButton.textContent = 'Like';
+        }
+    }
 
             
         }
