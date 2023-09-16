@@ -147,14 +147,9 @@
                  
             });
 var count = data.count;
-            counts.push(count);
+var countsArray = Array(usernames.length).fill(count);
+            alert(countsArray)
 
-        alert(counts);
-
-
-
-           
-            
             var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
             
