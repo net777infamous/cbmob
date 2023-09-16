@@ -124,59 +124,55 @@
 
         
 
-        function getJSON(offset) {
-            fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}`)
+      function getJSON(offset) {
+    fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}`)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            var usernames = data.results.map(function(result) {
+                return result.username;
+            });
+            
+            var locations = data.results.map(function(result) {
+                return result.location;
+            });
 
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    var usernames = data.results.map(function(result) {
-                        return result.username;
-                    });
+            var usernameElement = document.getElementById('username');
+            usernameElement.innerHTML = usernames.map(function(username) {
+                var fontSize = (username.length > 10) ? '12px' : '18px';
+                return `
+                    <div class="clickable">
+                        <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+                        <div style="font-size: ${fontSize};">${username}</div>
+                    </div>`;
+            }).join("");
 
-                 .then(function(data) {
-                    var locations = data.results.map(function(result) {
-                        return result.location;
-                    });
- 
-                    var usernameElement = document.getElementById('username');
-                    usernameElement.innerHTML = usernames.map(function(username) {
-                        var fontSize = (username.length > 10) ? '12px' : '18px';
-                        return `
-                            <div class="clickable">
-                                <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
-                                <div style="font-size: ${fontSize};">${username}</div>
-                            </div>`;
-                    }).join("");
+            var videoElement = document.getElementById('myVideo');
+            var player = videojs(videoElement);
 
-                    var videoElement = document.getElementById('myVideo');
-                    var player = videojs(videoElement);
+            var usernameDivs = usernameElement.getElementsByClassName('clickable');
+            for (var i = 0; i < usernameDivs.length; i++) {
+                var div = usernameDivs[i];
+                div.addEventListener('click', function(event) {
+                    var clickedUsername = event.currentTarget.textContent.trim();
+                    var selectedLocation = event.target.dataset.location;
+                    var divElement = document.getElementById("myDiv");
+                    divElement.innerHTML = selectedLocation;
 
-                    var usernameDivs = usernameElement.getElementsByClassName('clickable');
-                    for (var i = 0; i < usernameDivs.length; i++) {
-                        var div = usernameDivs[i];
-                        div.addEventListener('click', function(event) {
-                            var clickedUsername = event.currentTarget.textContent.trim();
-                            var selectedLocation = event.target.dataset.location;
-var divElement = document.getElementById("myDiv");
-
-                           divElement.innerHTML = selectedLocation
-
-        
-
-                            player.src([{
-                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
-                                type: 'application/x-mpegURL'
-                            }]);
-                            player.play();
-                        });
-                    }
-                })
-                .catch(function(error) {
-                    console.log('Error:', error);
+                    player.src([{
+                        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
+                        type: 'application/x-mpegURL'
+                    }]);
+                    player.play();
                 });
-        }
+            }
+        })
+        .catch(function(error) {
+            console.log('Error:', error);
+        });
+}
+
         
         function previous() {
             offset -= 19;
