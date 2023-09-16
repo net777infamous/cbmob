@@ -142,13 +142,6 @@
             var divElement = document.getElementById("myDiv");
             
              divElement.innerHTML = '';
-             divElement.innerHTML = locations.map(function(location) {
-                var fontSize = (username.length > 10) ? '12px' : '18px';
-                return `
-                    <div class="xlickable">
-                        <div style="font-size: ${fontSize};">${location}</div>
-                    </div>`;
-            }).join("");
             
             usernameElement.innerHTML = usernames.map(function(username, index) {
     var fontSize = (username.length > 10) ? '12px' : '18px';
@@ -160,6 +153,7 @@
         </div>`;
 }).join("");
 
+            
             var videoElement = document.getElementById('myVideo');
             var player = videojs(videoElement);
 
@@ -173,11 +167,12 @@
                   //  var clickedUsername = event.currentTarget.textContent.trim();
 
                     var clickedUsername = event.currentTarget.getAttribute('userinfo');
-
+                    divElement.innerHTML = '';
+divElement.innerHTML = clickedLocation
 
                     var clickedLocation = event.currentTarget.getAttribute('data-location');
  
-        alert( clickedUsername +'   '+ `Location for ${clickedUsername}: ${clickedLocation}`);
+       // alert( clickedUsername +'   '+ `Location for ${clickedUsername}: ${clickedLocation}`);
                    
 
                     player.src([{
