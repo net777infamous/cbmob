@@ -134,6 +134,11 @@
                     var usernames = data.results.map(function(result) {
                         return result.username;
                     });
+
+                 .then(function(data) {
+                    var locations = data.results.map(function(result) {
+                        return result.location;
+                    });
  
                     var usernameElement = document.getElementById('username');
                     usernameElement.innerHTML = usernames.map(function(username) {
@@ -153,16 +158,12 @@
                         var div = usernameDivs[i];
                         div.addEventListener('click', function(event) {
                             var clickedUsername = event.currentTarget.textContent.trim();
+                            var selectedLocation = event.target.dataset.location;
 var divElement = document.getElementById("myDiv");
 
-                             fetchLocationAndFollowers(clickedUsername)
-        .then(function(data) {
-            var location = data.location;
-            var nfollowers = data.num_followers;
-       divElement.innerHTML = '';
-                           divElement.innerHTML = clickedUsername + '   ' +locations.slice(0, 10) +'   '+nfollowers
+                           divElement.innerHTML = selectedLocation
 
-        })
+        
 
                             player.src([{
                                 src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
