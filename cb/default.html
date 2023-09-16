@@ -146,11 +146,10 @@
                 return result.num_followers;
                  
             });
+var count = data.count; // Store the count in a variable
 
-     var count = data.count; // Store the count in a variable
-
-        var countsArray = usernames.map(function(username, index) {
-           return count[index]; // Use the stored count for each result
+var countsArray = data.results.map(function(username, index) {
+           return count[index]; 
 });
 
             
@@ -187,8 +186,10 @@
 
                     var clickedLocation = event.currentTarget.getAttribute('data-location');
 
-                    divElement.innerHTML ='location:  '+ clickedLocation +'                                                 followers:  '+xfollow;
-
+                  //  divElement.innerHTML ='location:  '+ clickedLocation +'                                                 followers:  '+xfollow;
+                    
+divElement.innerHTML = clickedUsername
+                    
                     player.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
                         type: 'application/x-mpegURL'
@@ -221,6 +222,7 @@
         }
         
         function next() {
+            /*
             offset += 20;
             pagex += 1;
             console.log("page no "+pagex)
@@ -228,7 +230,16 @@
             clearUsernames
             clearUsernames();
             getJSON(offset);
+            */
+
+
+            var divElement = document.getElementById("myDiv");
+            
+            alert(divElement.innerHTML)
+
+            
         }
+        
         function updatePageNumber() {
             var pageNumberElement = document.getElementById('pageNumber');
             pageNumberElement.textContent = `(${pagex})`;
@@ -391,11 +402,11 @@ const muteButton = document.getElementById('muteButton');
             <!-- Add your other content here -->
         </div>
     </div>
-    <button class="previous-button" onclick="previous()">Previous</button>
-<button class="next-button" onclick="next()">Next</button>
+    <button class="previous-button" onclick="previous()">Tags</button>
+<button class="next-button" onclick="next()">Like</button>
 
 <div class="page-number" id="pageNumber" style="color: white; display: inline-block; margin-left: 15px; margin-right: 15px;">(1)</div>
-    <button class="page-button" onclick="redirectToOtherPage()">Other</button>
+    <button class="page-button" onclick="redirectToOtherPage()">Fav</button>
 
      <button class="mute-button"  id="muteButton" onclick="toggleMute()">Unmute</button>
       <div id="volumeControl">
