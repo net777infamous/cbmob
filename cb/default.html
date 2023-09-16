@@ -237,29 +237,10 @@ function handleSwipe() {
 }
 
 window.onload = function() {
-
-       var videoElement = document.getElementById('myVideo');
+    var videoElement = document.getElementById('myVideo');
     var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
-const muteButton = document.getElementById('muteButton');
-
-    var playerContainer = player.el();
-playerContainer.click();
-
-apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=1&gender=f";
-
-fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
-    data.results.forEach(result => {
-        player.src([{
-                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + result.username + '/playlist.m3u8',
-                                type: 'application/x-mpegURL'
-                            }]);
-                            player.play();
-    });
-  }); 
-
+    const muteButton = document.getElementById('muteButton');
 
     player.on('pause', function() {
         player.play().catch(function(error) {
@@ -268,31 +249,36 @@ fetch(apiUrl)
     });
 
     volumeSlider.addEventListener('input', function() {
-        if (player.paused()) {
-                player.play();
-            }
-        if (player.play()) {
-                player.play();
-            }
-  if (muteButton.textContent == 'Unmute') {
-     player.muted(false);
+        if (muteButton.textContent == 'Unmute') {
+            player.muted(false);
+        }
         player.volume(volumeSlider.value);
-        muteButton.textContent = 'Mute';
-      if (player.paused()) {
-                player.play();
-            }
-
-    }
- else if (muteButton.textContent == 'Mute') {
-        player.volume(volumeSlider.value);
-     if (player.paused()) {
-                player.play();
-            }
-
-}
     });
-};
 
+    muteButton.addEventListener('click', function() {
+        if (muteButton.textContent == 'Mute') {
+            player.muted(true);
+            muteButton.textContent = 'Unmute';
+        } else {
+            player.muted(false);
+            muteButton.textContent = 'Mute';
+        }
+    });
+
+    apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=1&gender=f";
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.results.length > 0) {
+                const result = data.results[0];
+                player.src([{
+                    src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + result.username + '/playlist.m3u8',
+                    type: 'application/x-mpegURL'
+                }]);
+            }
+        });
+};
 
 
 
