@@ -243,6 +243,8 @@ starty()
        var videoElement = document.getElementById('myVideo');
     var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
+volumeSlider.style.display = "none";
+
 const muteButton = document.getElementById('muteButton');
 
     var playerContainer = player.el();
@@ -303,15 +305,18 @@ function toggleMute() {
     var videoElement = document.getElementById('myVideo');
 var player = videojs(videoElement);
 const muteButton = document.getElementById('muteButton');
+const volumeSlider = document.getElementById('volumeSlider');
 
 
     if (muteButton.textContent == 'Mute') {
         player.muted(true);
         muteButton.textContent = 'Unmute';
+        volumeSlider.style.display = "none";
     } else if (muteButton.textContent == 'Unmute') {
         player.muted(false);
         player.volume(volumeSlider.value);
         muteButton.textContent = 'Mute';
+        volumeSlider.style.display = "block";
     }
   //  isMuted = !isMuted;
 }
