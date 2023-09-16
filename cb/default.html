@@ -146,9 +146,11 @@
                 return result.num_followers;
                  
             });
-var count = data.count;
 
-var countsArray = Array(data.results.length).fill(count);
+            var countsArray = data.results.map(function(result) {
+            return result.count;
+        });
+
 
 
             
