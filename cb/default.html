@@ -124,7 +124,7 @@
 
         
 
-      function getJSON(offset) {
+     function getJSON(offset) {
     fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}`)
         .then(function(response) {
             return response.json();
@@ -140,52 +140,42 @@
 
             var nfollowers = data.results.map(function(result) {
                 return result.num_followers;
-               
             });
 
-             var count = data.count;
-        
-
+            var count = data.count; // Moved this line here
+            
             var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
             
-             divElement.innerHTML = '';
+            divElement.innerHTML = '';
             
             usernameElement.innerHTML = usernames.map(function(username, index) {
-    var fontSize = (username.length > 10) ? '12px' : '18px';
-    return `
-        <div class="clickable" data-location="${locations[index]}" userinfo="${username}" vcount="${count[index]}" nfollow="${nfollowers[index]}">
-            <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
-            <div style="font-size: ${fontSize};">${username}</div>
-            <div style="display: none;">${locations[index]}</div>
-        </div>`;
-}).join("");
+                var fontSize = (username.length > 10) ? '12px' : '18px';
+                return `
+                    <div class="clickable" data-location="${locations[index]}" userinfo="${username}" vcount="${count}" nfollow="${nfollowers[index]}">
+                        <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+                        <div style="font-size: ${fontSize};">${username}</div>
+                        <div style="display: none;">${locations[index]}</div>
+                    </div>`;
+            }).join("");
 
-            
             var videoElement = document.getElementById('myVideo');
             var player = videojs(videoElement);
 
-             var locationDivs = divElement.getElementsByClassName('xlickable');
+            var locationDivs = divElement.getElementsByClassName('xlickable');
 
             var usernameDivs = usernameElement.getElementsByClassName('clickable');
             for (var i = 0; i < usernameDivs.length; i++) {
                 var div = usernameDivs[i];
                 div.addEventListener('click', function(event) {
-                    
-                  //  var clickedUsername = event.currentTarget.textContent.trim();
-
                     var clickedUsername = event.currentTarget.getAttribute('userinfo');
-
                     var xviews = event.currentTarget.getAttribute('vcount');
                     var xfollow = event.currentTarget.getAttribute('nfollow');
                     divElement.innerHTML = '';
 
-
                     var clickedLocation = event.currentTarget.getAttribute('data-location');
 
-                    divElement.innerHTML = clickedLocation +'    '+xviews+'    '+xfollow
-       // alert( clickedUsername +'   '+ `Location for ${clickedUsername}: ${clickedLocation}`);
-                   
+                    divElement.innerHTML = clickedLocation +'    '+xviews+'    '+xfollow;
 
                     player.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
@@ -199,6 +189,7 @@
             console.log('Error:', error);
         });
 }
+
 
         
         function previous() {
