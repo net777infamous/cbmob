@@ -135,11 +135,12 @@
             });
             
             var locations = data.results.map(function(result) {
-                return result.num_followers;
+                return result.location;
             });
 
             var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
+            
              divElement.innerHTML = '';
              divElement.innerHTML = locations.map(function(location) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
@@ -149,14 +150,15 @@
                     </div>`;
             }).join("");
             
-            usernameElement.innerHTML = usernames.map(function(username) {
-                var fontSize = (username.length > 10) ? '12px' : '18px';
-                return `
-                    <div class="clickable">
-                        <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
-                        <div style="font-size: ${fontSize};">${username}</div>
-                    </div>`;
-            }).join("");
+            usernameElement.innerHTML = usernames.map(function(username, index) {
+    var fontSize = (username.length > 10) ? '12px' : '18px';
+    return `
+        <div class="clickable" data-location="${locations[index]}">
+            <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+            <div style="font-size: ${fontSize};">${username}</div>
+            <div style="display: none;">${locations[index]}</div>
+        </div>`;
+}).join("");
 
             var videoElement = document.getElementById('myVideo');
             var player = videojs(videoElement);
@@ -167,8 +169,13 @@
             for (var i = 0; i < usernameDivs.length; i++) {
                 var div = usernameDivs[i];
                 div.addEventListener('click', function(event) {
-                    var clickedUsername = event.currentTarget.textContent.trim();
                     
+                    var clickedUsername = event.currentTarget.textContent.trim();
+
+
+                    var clickedLocation = event.currentTarget.getAttribute('data-location');
+ 
+        alert(`Location for ${clickedUsername}: ${clickedLocation}`);
                    
 
                     player.src([{
