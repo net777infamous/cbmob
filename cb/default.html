@@ -153,7 +153,7 @@
             usernameElement.innerHTML = usernames.map(function(username, index) {
     var fontSize = (username.length > 10) ? '12px' : '18px';
     return `
-        <div class="clickable" data-location="${locations[index]}">
+        <div class="clickable" data-location="${locations[index]}" userinfo="${username}">
             <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
             <div style="font-size: ${fontSize};">${username}</div>
             <div style="display: none;">${locations[index]}</div>
@@ -170,7 +170,9 @@
                 var div = usernameDivs[i];
                 div.addEventListener('click', function(event) {
                     
-                    var clickedUsername = event.currentTarget.textContent.trim();
+                  //  var clickedUsername = event.currentTarget.textContent.trim();
+
+                    var clickedUsername = event.currentTarget.getAttribute('userinfo');
 
 
                     var clickedLocation = event.currentTarget.getAttribute('data-location');
