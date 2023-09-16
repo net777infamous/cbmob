@@ -183,12 +183,33 @@ var countsArray = data.results.map(function(username, index) {
                  //   var xviews = event.currentTarget.getAttribute('vcount');
                     var xfollow = event.currentTarget.getAttribute('nfollow');
                     divElement.innerHTML = '';
+                    
 
                     var clickedLocation = event.currentTarget.getAttribute('data-location');
 
                   //  divElement.innerHTML ='location:  '+ clickedLocation +'                                                 followers:  '+xfollow;
                     
 divElement.innerHTML = clickedUsername
+
+
+
+
+    var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
+var likeButton = document.querySelector('.next-button');
+    if (!mobArr.includes(clickedUsername)) {
+        likeButton.textContent = 'Unlike';
+    } else {
+        const index = mobArr.indexOf(clickedUsername);
+        if (index !== -1) {
+            likeButton.textContent = 'Like';
+        }
+    }
+
+
+
+
+
+                    
                     
                     player.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
