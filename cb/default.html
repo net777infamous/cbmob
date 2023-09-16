@@ -241,6 +241,13 @@ window.onload = function() {
     var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
 const muteButton = document.getElementById('muteButton');
+
+    player.on('pause', function() {
+        player.play().catch(function(error) {
+            console.error('Failed to play video:', error);
+        });
+    });
+
     volumeSlider.addEventListener('input', function() {
         if (player.paused()) {
                 player.play();
