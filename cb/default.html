@@ -153,8 +153,66 @@
                         div.addEventListener('click', function(event) {
                             var clickedUsername = event.currentTarget.textContent.trim();
 var divElement = document.getElementById("myDiv");
-        divElement.innerHTML = '';
-                            divElement.innerHTML = clickedUsername;
+     //   divElement.innerHTML = '';
+                       //     divElement.innerHTML = clickedUsername;
+
+
+
+
+var viewCount = '';
+
+
+var url = "https://chaturbate.com/push_service/room_user_count/"+clickedUsername+"/?presence_id=d5jdfxmaiue";
+        const referer = "https://chaturbate.com/chloewildd/";
+
+fetch(url, {
+  method: "GET",
+  headers: {
+    "Referer": referer,
+    "X-Requested-With": "XMLHttpRequest"
+  }
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then(data => {
+const dataObject = JSON.parse(data);
+const countValue = dataObject.count;
+    viewCount = countValue; 
+  })
+  .catch(error => {
+   console.log("Fetch error: ", error);
+  });
+ url = "https://chaturbate.com/api/biocontext/"+clickedUsername+"/";
+ fetch(url)
+  .then((response) => {
+    if (response.status === 200) {
+      // Parse the JSON response
+      return response.json();
+    } else {
+      throw new Error("Failed to fetch data");
+    }
+  })
+  .then((data) => {
+      divElement.innerHTML = ("NAME: " + clickedUsername.toUpperCase() + "    VIEWS: "+ viewCount + "    AGE: "+ data.display_age + "    FOLLOWERS: " + data.follower_count + "  LOCATION: " + data.location.toUpperCase().slice(0, 20));
+     divElement.title = ("NAME: " + clickedUsername.toUpperCase() + "    VIEWS: "+ viewCount + "    AGE: "+ data.display_age + "    FOLLOWERS: " + data.follower_count + "  LOCATION: " + data.location.toUpperCase().slice(0, 20));
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+
+
+
+
+
+
+
+
+                            
                             player.src([{
                                 src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
                                 type: 'application/x-mpegURL'
