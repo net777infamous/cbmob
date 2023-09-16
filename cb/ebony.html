@@ -256,7 +256,7 @@ fetch(apiUrl)
     var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
 
-            volumeSlider.style.display = "none";
+           // volumeSlider.style.display = "none";
 
     volumeSlider.addEventListener('input', function() {
   if (player.muted()) {
@@ -287,12 +287,12 @@ const muteButton = document.getElementById('muteButton');
     if (isMuted) {
         player.muted(true);
         muteButton.textContent = 'Unmute';
-            volumeSlider.style.display = "none";
+           // volumeSlider.style.display = "none";
     } else {
         player.muted(false);
         player.volume(volumeSlider.value);
         muteButton.textContent = 'Mute';
-            volumeSlider.style.display = "block";
+          //  volumeSlider.style.display = "block";
     }
     isMuted = !isMuted;
 }
