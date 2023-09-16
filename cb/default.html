@@ -14,10 +14,24 @@
         }
         body {
     background-color: black;
+            
 }
         .vjs-control-bar {
     opacity: 1 !important; /* Ensure full opacity */
+             transition: none !important; /* Remove any transition effect */
+    pointer-events: auto !important; /* Allow interaction */
 }
+
+         #videoPlayer {
+            flex: 1;
+            padding: 3px;
+        }
+
+        .video-js {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
         
         #otherContent {
             flex: 1;
