@@ -241,6 +241,7 @@ window.onload = function() {
       const muteButton = document.getElementById('muteButton');
        muteButton.textContent = 'Mute';
         player.muted(false);
+      player.volume(volumeSlider.value);
       player.play();
     }
 
