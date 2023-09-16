@@ -388,16 +388,7 @@ var dropdown = document.getElementById('mobFavDropdown');
 
 const muteButton = document.getElementById('muteButton');
 dropdown.addEventListener('change', function() {
-    var selectedOption = dropdown.options[dropdown.selectedIndex].text;
-    if (selectedOption !== 'mobFav is empty.') {
-
-  player.src([{
-                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + selectedOption + '/playlist.m3u8',
-                                type: 'application/x-mpegURL'
-                            }]);
-                            player.play();
-        
-    }
+clearUsernames();
 });
             
     var playerContainer = player.el();
@@ -501,6 +492,7 @@ const muteButton = document.getElementById('muteButton');
             <!-- Add your other content here -->
         </div>
     </div>
+       <div style="display: flex; align-items: center;">
      <!--  <button class="previous-button" onclick="previous()">Tags</button> -->
     <select id="mobFavDropdown">
   <option value="ebony">ebony</option>
@@ -512,7 +504,7 @@ const muteButton = document.getElementById('muteButton');
 <div class="page-number" id="pageNumber" style="color: white; display: inline-block; margin-left: 15px; margin-right: 15px;">(1)</div>
  <!--    <button class="page-button" onclick="redirectToOtherPage()">Fav</button> -->
 
-    <div style="display: flex; align-items: center;">
+ 
   <button class="mute-button" id="muteButton" onclick="toggleMute()">Unmute</button>
   <div id="myDiv" class="myClass"></div>
 </div>
