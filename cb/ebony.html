@@ -105,8 +105,13 @@
 
 #volumeSlider {
     width: 98%; 
-    margin-top: 50px; 
+    margin-top: 20px; 
     
+}
+#myDiv {
+    color: white;
+    margin-top: 25px;
+    text-align: center;
 }
 
 
@@ -127,36 +132,62 @@
                     var usernames = data.results.map(function(result) {
                         return result.username;
                     });
-                    var usernameElement = document.getElementById('username');
-                    usernameElement.innerHTML = usernames.map(function(username) {
-                        var fontSize = (username.length > 10) ? '12px' : '18px';
-                        return `
-                            <div class="clickable">
-                                <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
-                                <div style="font-size: ${fontSize};">${username}</div>
-                            </div>`;
-                    }).join("");
+                                var locations = data.results.map(function(result) {
+                return result.location;
+            });
+            var nfollowers = data.results.map(function(result) {
+                return result.num_followers;
+                 
+            });
+                    
 
-                    var videoElement = document.getElementById('myVideo');
-                    var player = videojs(videoElement);
 
-                    var usernameDivs = usernameElement.getElementsByClassName('clickable');
-                    for (var i = 0; i < usernameDivs.length; i++) {
-                        var div = usernameDivs[i];
-                        div.addEventListener('click', function(event) {
-                            var clickedUsername = event.currentTarget.textContent.trim();
-                            player.src([{
-                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
-                                type: 'application/x-mpegURL'
-                            }]);
-                            player.play();
-                        });
-                    }
-                })
-                .catch(function(error) {
-                    console.log('Error:', error);
+                    
+                   var usernameElement = document.getElementById('username');
+            var divElement = document.getElementById("myDiv");
+            
+            divElement.innerHTML = '';
+            
+            usernameElement.innerHTML = usernames.map(function(username, index) {
+                var fontSize = (username.length > 10) ? '12px' : '18px';
+                return `
+                    <div class="clickable" data-location="${locations[index]}" userinfo="${username}" nfollow="${nfollowers[index]}">
+                        <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+                        <div style="font-size: ${fontSize};">${username}</div>
+                        <div style="display: none;">${locations[index]}</div>
+                    </div>`;
+            }).join("");
+
+            var videoElement = document.getElementById('myVideo');
+            var player = videojs(videoElement);
+
+            var locationDivs = divElement.getElementsByClassName('xlickable');
+
+            var usernameDivs = usernameElement.getElementsByClassName('clickable');
+            for (var i = 0; i < usernameDivs.length; i++) {
+                var div = usernameDivs[i];
+                div.addEventListener('click', function(event) {
+                    var clickedUsername = event.currentTarget.getAttribute('userinfo');
+                 //   var xviews = event.currentTarget.getAttribute('vcount');
+                    var xfollow = event.currentTarget.getAttribute('nfollow');
+                    divElement.innerHTML = '';
+
+                    var clickedLocation = event.currentTarget.getAttribute('data-location');
+
+                    divElement.innerHTML ='location:  '+ clickedLocation +'                                                 followers:  '+xfollow;
+
+                    player.src([{
+                        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
+                        type: 'application/x-mpegURL'
+                    }]);
+                    player.play();
                 });
-        }
+            }
+        })
+        .catch(function(error) {
+            console.log('Error:', error);
+        });
+}
         
         function previous() {
             offset -= 19;
@@ -327,6 +358,7 @@ const muteButton = document.getElementById('muteButton');
     <button class="page-button" onclick="redirectToOtherPage()">Other</button>
       <button class="mute-button"  id="muteButton" onclick="toggleMute()">Unmute</button>
     <div id="volumeControl">
+         <div id="myDiv" class="myClass"> </div>
         <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.2">
     </div>
 </body>
