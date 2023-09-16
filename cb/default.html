@@ -253,10 +253,11 @@ var likeButton = document.querySelector('.next-button');
 
       var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
     var dropdown = document.getElementById('mobFavDropdown');
+            var divElement = document.getElementById('myDiv');
 
     // Clear existing options
     dropdown.innerHTML = '';
-            if (dropdown.innerHTML !== ''){
+            if (divElement.innerHTML !== ''){
 
     if (mobArr.length > 0) {
         // Create and add an option for each item in mobArr
