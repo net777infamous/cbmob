@@ -127,6 +127,9 @@
         
 
      function getJSON(offset) {
+         var counts = [];
+
+         
     fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}`)
         .then(function(response) {
             return response.json();
@@ -143,11 +146,10 @@
                 return result.num_followers;
                  
             });
-var counts = data.results.map(function(result) {
-                return result.count;
-            });
+var count = data.count;
+            counts.push(count);
 
-            alert(counts)
+        alert(counts);
 
 
 
