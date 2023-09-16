@@ -242,7 +242,7 @@ divElement.innerHTML = clickedUsername
 
   var divElement = document.getElementById('myDiv');
     var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
-ar likeButton = document.querySelector('.next-button');
+var likeButton = document.querySelector('.next-button');
     if (!mobArr.includes(divElement.innerHTML)) {
         mobArr.push(divElement.innerHTML);
         localStorage.setItem('mobFav', mobArr.join(','));
