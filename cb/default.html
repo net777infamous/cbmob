@@ -125,7 +125,7 @@
 
     </style>
     <script>
-        localStorage.removeItem('mobFav');
+      
 
         var offset = 0;
         var pagex = 1;
@@ -371,16 +371,34 @@ function handleSwipe() {
 }
 
 window.onload = function() {
+    
 starty()
 }
         function starty() {
+var dropdown = document.getElementById('mobFavDropdown');
+
+
+
+            
        var videoElement = document.getElementById('myVideo');
     var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
 //volumeSlider.style.display = "none";
 
 const muteButton = document.getElementById('muteButton');
+dropdown.addEventListener('change', function() {
+    var selectedOption = dropdown.options[dropdown.selectedIndex].text;
+    if (selectedOption !== 'mobFav is empty.') {
 
+  player.src([{
+                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + selectedOption + '/playlist.m3u8',
+                                type: 'application/x-mpegURL'
+                            }]);
+                            player.play();
+        
+    }
+});
+            
     var playerContainer = player.el();
 playerContainer.click();
 
