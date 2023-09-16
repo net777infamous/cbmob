@@ -240,6 +240,7 @@ divElement.innerHTML = clickedUsername
 
     // Clear existing options
     dropdown.innerHTML = '';
+            if (dropdown.innerHTML !== ''){
 
     if (mobArr.length > 0) {
         // Create and add an option for each item in mobArr
@@ -253,7 +254,8 @@ divElement.innerHTML = clickedUsername
         option.text = 'mobFav is empty.';
         dropdown.add(option);
     }
-            
+
+            }
         }
 
              function next2() {
