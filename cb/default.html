@@ -116,8 +116,7 @@
         var pagex = 1;
 
 
-            var videoElement = document.getElementById('myVideo');
-    var player = videojs(videoElement); 
+            
 
         
 
@@ -238,27 +237,38 @@ function handleSwipe() {
 }
 
 window.onload = function() {
+    var videoElement = document.getElementById('myVideo');
+    var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
-const muteButton = document.getElementById('muteButton');
+    const muteButton = document.getElementById('muteButton');
+
     volumeSlider.addEventListener('input', function() {
-  if (muteButton.textContent == 'Unmute') {
-     player.muted(false);
-        player.volume(volumeSlider.value);
-        muteButton.textContent = 'Mute';
-      if (player.paused()) {
-                player.play();
+        if (muteButton.textContent == 'Unmute') {
+            player.muted(false);
+            player.volume(volumeSlider.value);
+            muteButton.textContent = 'Mute';
+            
+            // Play the video to ensure it continues playing
+            if (player.paused()) {
+                player.play().catch(function(error) {
+                    // Handle any errors here if necessary
+                    console.error('Failed to play video:', error);
+                });
             }
-
-    }
- else if (muteButton.textContent == 'Mute') {
-        player.volume(volumeSlider.value);
-     if (player.paused()) {
-                player.play();
+        } else if (muteButton.textContent == 'Mute') {
+            player.volume(volumeSlider.value);
+            
+            // Play the video to ensure it continues playing
+            if (player.paused()) {
+                player.play().catch(function(error) {
+                    // Handle any errors here if necessary
+                    console.error('Failed to play video:', error);
+                });
             }
-
-}
+        }
     });
 };
+
 
 
 
