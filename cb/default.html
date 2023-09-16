@@ -139,6 +139,16 @@
             });
 
             var usernameElement = document.getElementById('username');
+            var divElement = document.getElementById("myDiv");
+             divElement.innerHTML = '';
+             divElement.innerHTML = usernames.map(function(username) {
+                var fontSize = (username.length > 10) ? '12px' : '18px';
+                return `
+                    <div class="clickable">
+                        <div style="font-size: ${fontSize};">${username}</div>
+                    </div>`;
+            }).join("");
+            
             usernameElement.innerHTML = usernames.map(function(username) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
                 return `
@@ -156,9 +166,8 @@
                 var div = usernameDivs[i];
                 div.addEventListener('click', function(event) {
                     var clickedUsername = event.currentTarget.textContent.trim();
-                    var selectedLocation = event.target.dataset.location;
-                    var divElement = document.getElementById("myDiv");
-                    divElement.innerHTML = selectedLocation;
+                    
+                   
 
                     player.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
