@@ -137,12 +137,16 @@
             var locations = data.results.map(function(result) {
                 return result.location;
             });
-
             var nfollowers = data.results.map(function(result) {
                 return result.num_followers;
+                 
             });
 
-            var count = data.count; 
+            var counts = data.results.map(function(result) {
+            return data.count;
+        });
+
+           
             
             var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
@@ -152,7 +156,7 @@
             usernameElement.innerHTML = usernames.map(function(username, index) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
                 return `
-                    <div class="clickable" data-location="${locations[index]}" userinfo="${username}" vcount="${count[index]}" nfollow="${nfollowers[index]}">
+                    <div class="clickable" data-location="${locations[index]}" userinfo="${username}" vcount="${counts[index]}" nfollow="${nfollowers[index]}">
                         <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
                         <div style="font-size: ${fontSize};">${username}</div>
                         <div style="display: none;">${locations[index]}</div>
