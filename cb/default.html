@@ -115,6 +115,12 @@
         var offset = 0;
         var pagex = 1;
 
+
+            var videoElement = document.getElementById('myVideo');
+    var player = videojs(videoElement); 
+
+        
+
         function getJSON(offset) {
             fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}`)
 
@@ -232,8 +238,6 @@ function handleSwipe() {
 }
 
 window.onload = function() {
-    var videoElement = document.getElementById('myVideo');
-    var player = videojs(videoElement); 
     const volumeSlider = document.getElementById('volumeSlider');
 const muteButton = document.getElementById('muteButton');
     volumeSlider.addEventListener('input', function() {
