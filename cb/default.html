@@ -203,13 +203,7 @@ var likeButton = document.querySelector('.next-button');
         if (index !== -1) {
             likeButton.textContent = 'Like';
         }
-    }
-
-
-
-
-
-                    
+    }    
                     
                     player.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
@@ -485,7 +479,7 @@ const muteButton = document.getElementById('muteButton');
         </div>
     </div>
      <!--  <button class="previous-button" onclick="previous()">Tags</button> -->
-    <select id="mobFavDropdown">
+    <select id="mobFavDropdown" onclick="previous()">
 </select>
 <button class="next-button" onclick="next()">Like</button>
 
