@@ -147,12 +147,12 @@
                  
             });
 
-            var countsArray = data.results.map(function(result) {
-    return data.count;
+            var countsArray = data.map(function(result) {
+    return result.count;
 });
 
             
-            alert(nfollowers)
+            alert(countsArray)
 
             var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
