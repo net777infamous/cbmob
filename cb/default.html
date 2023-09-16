@@ -138,6 +138,10 @@
                     var locations = data.results.map(function(result) {
             return result.location;
         });
+
+                         var nfollowers = data.results.map(function(result) {
+            return result.num_followers;
+        });
                 
                     var usernameElement = document.getElementById('username');
                     usernameElement.innerHTML = usernames.map(function(username) {
@@ -159,10 +163,9 @@
                             var clickedUsername = event.currentTarget.textContent.trim();
 var divElement = document.getElementById("myDiv");
        divElement.innerHTML = '';
-                           divElement.innerHTML = clickedUsername + '   ' +locations.slice(0, 15)
+                           divElement.innerHTML = clickedUsername + '   ' +locations.slice(0, 10) +'   '+nfollowers
 
 
-                            
                             player.src([{
                                 src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
                                 type: 'application/x-mpegURL'
