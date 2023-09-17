@@ -260,7 +260,10 @@ var likeButton = document.querySelector('.next-button');
                 offset = 0;
             }
             clearUsernames();
-            getJSON(offset); 
+            //getJSON(offset); 
+               var selectElement = document.getElementById("mobFavDropdown");
+            var displayedText = selectElement.options[selectElement.selectedIndex].text;
+            getJSON(offset, undefined, displayedText);
            }
 
         
