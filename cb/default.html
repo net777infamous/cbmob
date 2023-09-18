@@ -226,7 +226,16 @@ var countsArray = data.results.map(function(username, index) {
            var videoElement2 = document.getElementById('myVideo2');
             var player2 = videojs(videoElement2); 
 
-            if (!player.muted() && !player2.muted()) {
+   
+            
+            var locationDivs = divElement.getElementsByClassName('xlickable');
+
+            var usernameDivs = usernameElement.getElementsByClassName('clickable');
+            for (var i = 0; i < usernameDivs.length; i++) {
+                var div = usernameDivs[i];
+                div.addEventListener('click', function(event) {
+
+                             if (!player.muted() && !player2.muted()) {
     // Both players are unmuted
 return
 } else if (!player.muted()) {
@@ -240,13 +249,6 @@ return
     alert("nun");
                 return;
 }
-            
-            var locationDivs = divElement.getElementsByClassName('xlickable');
-
-            var usernameDivs = usernameElement.getElementsByClassName('clickable');
-            for (var i = 0; i < usernameDivs.length; i++) {
-                var div = usernameDivs[i];
-                div.addEventListener('click', function(event) {
                     
                     var clickedLoc = event.currentTarget.getAttribute('data-location');
                     var clickedUsername = event.currentTarget.getAttribute('userinfo');
