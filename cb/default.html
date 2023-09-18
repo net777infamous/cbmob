@@ -246,6 +246,29 @@ var countsArray = data.results.map(function(username, index) {
   
 
             var usernameElement = document.getElementById('username');
+
+
+
+var clickableDivs = usernameElement.querySelectorAll('.clickable');
+
+clickableDivs.forEach(function(div) {
+    div.addEventListener('click', function(event) {
+        // Remove the red color from all usernames
+        clickableDivs.forEach(function(otherDiv) {
+            otherDiv.style.color = 'white';
+        });
+
+        // Change the color of the clicked username to red
+        div.style.color = 'red';
+        // ... (your existing code)
+    });
+});
+
+
+
+
+
+            
             var divElement = document.getElementById("myDiv");
             
            // divElement.innerHTML = '';
