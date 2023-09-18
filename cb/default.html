@@ -509,6 +509,8 @@ fetch(apiUrl)
     });
 
     volumeSlider.addEventListener('input', function() {
+        if (window.which == "play1"){
+            player2.muted(true);
         if (player.paused()) {
                 player.play();
             }
@@ -531,6 +533,37 @@ fetch(apiUrl)
             }
 
 }
+        }
+        else if (window.which == "play2"){  
+player.muted(true);
+
+  if (player2.paused()) {
+                player2.play();
+            }
+        if (player2.play()) {
+                player2.play();
+            }
+  if (muteButton.textContent == 'Unmute') {
+     player2.muted(false);
+        player2.volume(volumeSlider.value);
+        muteButton.textContent = 'Mute';
+      if (player2.paused()) {
+                player2.play();
+            }
+
+    }
+ else if (muteButton.textContent == 'Mute') {
+        player2.volume(volumeSlider.value);
+     if (player2.paused()) {
+                player2.play();
+            }
+
+}
+
+
+
+
+        }
     });
 };
 
