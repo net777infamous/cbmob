@@ -205,6 +205,11 @@ var countsArray = data.results.map(function(username, index) {
             var videoElement = document.getElementById('myVideo');
             var player = videojs(videoElement);
 
+
+            var videoElement2 = document.getElementById('myVideo2');
+            var player2 = videojs(videoElement2);
+
+            
             var locationDivs = divElement.getElementsByClassName('xlickable');
 
             var usernameDivs = usernameElement.getElementsByClassName('clickable');
@@ -232,13 +237,22 @@ divElement.innerHTML = clickedUsername +'     '+xfollow + '     '+clickedLoc.sli
 var likeButton = document.querySelector('.next-button');
             likeButton.textContent = 'Like';
                     */
-     
+     window.which = "play1"
                     
                     player.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
                         type: 'application/x-mpegURL'
                     }]);
                     player.play();
+
+
+                    player2.src([{
+                        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
+                        type: 'application/x-mpegURL'
+                    }]);
+                    player2.play();
+
+                    
                 });
             }
         })
