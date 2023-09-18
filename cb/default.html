@@ -158,7 +158,7 @@
 
     </style>
     <script>
-    //  window.which = "play2";
+      window.which = "play2";
 
         var offset = 0;
         var pagex = 1;
@@ -246,8 +246,15 @@ return
     window.which = "play1";
 } else {
     // Both players are muted
-    alert("nun");
-                return;
+   if (window.which == "play1"){
+       window.which == "play2"
+
+   }
+                                 else if (window.which == "play2"){
+                                     window.which == "play1"
+
+                                 }
+                
 }
                     
                     var clickedLoc = event.currentTarget.getAttribute('data-location');
