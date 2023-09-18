@@ -147,7 +147,7 @@
 
     </style>
     <script>
-      window.which;
+      window.which = "play1";
 
         var offset = 0;
         var pagex = 1;
@@ -254,7 +254,7 @@ var likeButton = document.querySelector('.next-button');
                     window.which = "play2"
                   }
 
-                    if (window.which == "play2"){  
+                    else if (window.which == "play2"){  
 
                     player2.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
@@ -262,15 +262,6 @@ var likeButton = document.querySelector('.next-button');
                     }]);
                     player2.play(); 
                     window.which = "play1"
-                    }
-
-                    if (window.which == undefined){  
-                        player.src([{
-                        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
-                        type: 'application/x-mpegURL'
-                    }]);
-                    player.play();
-                    window.which = "play2"
                     }
 
                     
