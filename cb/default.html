@@ -226,13 +226,6 @@ var countsArray = data.results.map(function(username, index) {
            var videoElement2 = document.getElementById('myVideo2');
             var player2 = videojs(videoElement2); 
 
-
-if (!player.muted()) {
-    window.which = "play2";
-} else if (!player2.muted()) {
-    window.which = "play1";
-}
-
             if (!player.muted() && !player2.muted()) {
     // Both players are unmuted
 return
