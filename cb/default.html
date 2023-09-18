@@ -270,12 +270,12 @@ var countsArray = data.results.map(function(username, index) {
 
                     if (player.muted()) {
     player.muted(false);
-       xButton.innerHTML = '';
-     xButton.innerHTML = '🔊';
+       xButton1.innerHTML = '';
+     xButton1.innerHTML = '🔊';
   } else {
     player.muted(true);
-      xButton.innerHTML = '';
-    xButton.innerHTML = '🔇';
+      xButton1.innerHTML = '';
+    xButton1.innerHTML = '🔇';
   }
 
 
@@ -284,12 +284,12 @@ var countsArray = data.results.map(function(username, index) {
               xButton2.onclick = function () {
   if (player2.muted()) {
     player2.muted(false);
-       xButton.innerHTML = '';
-     xButton.innerHTML = '🔊';
+       xButton2.innerHTML = '';
+     xButton2.innerHTML = '🔊';
   } else {
     player.muted(true);
-      xButton.innerHTML = '';
-    xButton.innerHTML = '🔇';
+      xButton2.innerHTML = '';
+    xButton2.innerHTML = '🔇';
   }
 
         }
