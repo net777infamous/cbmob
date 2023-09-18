@@ -163,20 +163,61 @@
         var offset = 0;
         var pagex = 1;
 
+var topp1 = document.createElement('div');
+topp1.innerHTML = '';
 
+var xButton1 = document.createElement('button');
+xButton1.innerHTML = '🔇';
+xButton1.style.display = 'inline-block';
+xButton1.style.fontSize = '70px';
+xButton1.style.backgroundColor = 'transparent';
+xButton1.style.border = 'none';
+xButton1.style.cursor = 'pointer';
+
+      
+
+topp1.appendChild(xButton1);
+topp1.style.width = '320px';
+topp1.style.height = '22px';
+topp1.style.position = 'absolute';
+topp1.style.textAlign = 'center';
+//topp1.style.left = '1%';
+topp1.style.top = '80%';
+topp1.style.opacity = '1';
+
+var topp2 = document.createElement('div');
+topp2.innerHTML = '';
+
+var xButton2 = document.createElement('button');
+xButton2.innerHTML = '🔇';
+xButton2.style.display = 'inline-block';
+xButton2.style.fontSize = '70px';
+xButton2.style.backgroundColor = 'transparent';
+xButton2.style.border = 'none';
+xButton2.style.cursor = 'pointer';
+
+topp2.appendChild(xButton2);
+topp2.style.width = '320px';
+topp2.style.height = '22px';
+topp2.style.position = 'absolute';
+topp2.style.textAlign = 'center';
+//topp2.style.left = '1%';
+topp2.style.top = '5%';
+topp2.style.opacity = '1';
+        
             
 
         var counts = [];
 
      function getJSON(offset, tag, arg) {
          
-let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=ebony&offset=${offset}`;
+let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&tag=ebony&gender=f&offset=${offset}`;
  if (arg && arg.length > 1) {
- url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&tag=ebony&offset=${offset}&tag=${arg}`;
+ url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&tag=ebony&gender=f&offset=${offset}&tag=${arg}`;
  }
     if (tag) {
         
-        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&tag=ebony&offset=${offset}&tag=${tag}`;
+        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&tag=ebony&gender=f&offset=${offset}&tag=${tag}`;
     }
         
     fetch(url)
@@ -222,9 +263,39 @@ var countsArray = data.results.map(function(username, index) {
            var videoElement = document.getElementById('myVideo');
             var player = videojs(videoElement); 
 
-
            var videoElement2 = document.getElementById('myVideo2');
             var player2 = videojs(videoElement2); 
+
+              xButton1.onclick = function () {
+
+                    if (player.muted()) {
+    player.muted(false);
+       xButton1.innerHTML = '';
+     xButton1.innerHTML = '🔊';
+  } else {
+    player.muted(true);
+      xButton1.innerHTML = '';
+    xButton1.innerHTML = '🔇';
+  }
+
+
+        }
+
+              xButton2.onclick = function () {
+  if (player2.muted()) {
+    player2.muted(false);
+       xButton2.innerHTML = '';
+     xButton2.innerHTML = '🔊';
+  } else {
+    player2.muted(true);
+      xButton2.innerHTML = '';
+    xButton2.innerHTML = '🔇';
+  }
+
+        }
+
+            videoElement.appendChild(topp1);
+videoElement2.appendChild(topp2);
 
    
             
