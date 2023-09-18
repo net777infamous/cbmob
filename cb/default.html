@@ -510,34 +510,8 @@ fetch(apiUrl)
 
     volumeSlider.addEventListener('input', function() {
         if (window.which == "play1"){
-            player2.muted(true);
-        if (player.paused()) {
-                player.play();
-            }
-        if (player.play()) {
-                player.play();
-            }
-  if (muteButton.textContent == 'Unmute') {
-     player.muted(false);
-        player.volume(volumeSlider.value);
-        muteButton.textContent = 'Mute';
-      if (player.paused()) {
-                player.play();
-            }
-
-    }
- else if (muteButton.textContent == 'Mute') {
-        player.volume(volumeSlider.value);
-     if (player.paused()) {
-                player.play();
-            }
-
-}
-        }
-        else if (window.which == "play2"){  
-player.muted(true);
-
-  if (player2.paused()) {
+            player.muted(true);
+        if (player2.paused()) {
                 player2.play();
             }
         if (player2.play()) {
@@ -556,6 +530,32 @@ player.muted(true);
         player2.volume(volumeSlider.value);
      if (player2.paused()) {
                 player2.play();
+            }
+
+}
+        }
+        else if (window.which == "play2"){  
+player2.muted(true);
+
+  if (player.paused()) {
+                player.play();
+            }
+        if (player.play()) {
+                player.play();
+            }
+  if (muteButton.textContent == 'Unmute') {
+     player.muted(false);
+        player.volume(volumeSlider.value);
+        muteButton.textContent = 'Mute';
+      if (player.paused()) {
+                player.play();
+            }
+
+    }
+ else if (muteButton.textContent == 'Mute') {
+        player.volume(volumeSlider.value);
+     if (player.paused()) {
+                player.play();
             }
 
 }
