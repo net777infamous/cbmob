@@ -7,23 +7,38 @@
     <style>
         #container {
             position: relative;
-    top: 50%;
+    top: 20%;
             display: flex;
-            height: 85vh;
+            height: 90vh;
             flex-direction: column; /
         }
         body {
     background-color: black;
+            
 }
-        #videoPlayer {
+        .vjs-control-bar {
+    opacity: 0 !important; /* Ensure full opacity */
+             transition: none !important; /* Remove any transition effect */
+    pointer-events: auto !important; /* Allow interaction */
+            display: none;
+}
+
+         #videoPlayer {
             flex: 1;
             padding: 3px;
+        }
+
+               #videoPlayer2 {
+            flex: 1;
+            padding: 3px;
+                   margin-top: 10px;
         }
 
         .video-js {
             width: 100% !important;
             height: 100% !important;
         }
+
         
         #otherContent {
             flex: 1;
@@ -40,6 +55,7 @@
 
         #pageNumber {
             color: white; /* Set the color to white */
+            display: none;
         }
 
         .clickable {
@@ -54,8 +70,8 @@
 
         .thumbnail {
             display: block;
-            width: 185px;
-            height: 170px;
+            width: 129px;
+            height: 163px;
             background-size: cover;
             margin-bottom: 5px;
         }
@@ -68,6 +84,7 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+            display: none;
 }
 
 .next-button {
@@ -78,6 +95,7 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+    display: none;
 }
 
 .page-button {
@@ -88,7 +106,16 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+    font-weight: bold;
+    display: none;
 }
+
+.page-number {
+    font-size: 25px; /* Adjust the font size for the number */
+    font-weight: bold;
+    display: none;
+}
+
 .mute-button {
     background-color: purple;
     color: white;
@@ -96,57 +123,90 @@
     padding: 15px 70px;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    display: none;
 }
 
-.page-number {
-    font-size: 25px; /* Adjust the font size for the number */
-}
-
+        
 #volumeSlider {
     width: 98%; 
-    margin-top: 20px; 
+    margin-top: 40px; 
+    display: none;
     
 }
 #myDiv {
     color: white;
-    margin-top: 25px;
+    margin-top: 7px;
     text-align: center;
+    margin-left: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    display: none;
 }
-
-
+        #mobFavDropdown {
+    width: 200px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+ 
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 10px; /* Adjust the padding as needed */
+            display: none;
+}
 
 
     </style>
     <script>
+      window.which = "play2";
+
         var offset = 0;
         var pagex = 1;
 
-        function getJSON(offset) {
-            fetch(`https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&tag=ebony&gender=f&offset=${offset}`)
 
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    var usernames = data.results.map(function(result) {
-                        return result.username;
-                    });
-                                var locations = data.results.map(function(result) {
+            
+
+        var counts = [];
+
+     function getJSON(offset, tag, arg) {
+         
+let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=ebony&offset=${offset}`;
+ if (arg && arg.length > 1) {
+ url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${arg}`;
+ }
+    if (tag) {
+        
+        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${tag}`;
+    }
+        
+    fetch(url)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            var usernames = data.results.map(function(result) {
+                return result.username;
+            });
+            
+            var locations = data.results.map(function(result) {
                 return result.location;
             });
             var nfollowers = data.results.map(function(result) {
                 return result.num_followers;
                  
             });
-                    
+var count = data.count; // Store the count in a variable
 
+var countsArray = data.results.map(function(username, index) {
+           return count[index]; 
+});
 
-                    
-                   var usernameElement = document.getElementById('username');
+            
+  
+
+            var usernameElement = document.getElementById('username');
             var divElement = document.getElementById("myDiv");
             
-            divElement.innerHTML = '';
+           // divElement.innerHTML = '';
             
             usernameElement.innerHTML = usernames.map(function(username, index) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
@@ -158,29 +218,63 @@
                     </div>`;
             }).join("");
 
-            var videoElement = document.getElementById('myVideo');
-            var player = videojs(videoElement);
+           var videoElement = document.getElementById('myVideo');
+            var player = videojs(videoElement); 
 
+
+           var videoElement2 = document.getElementById('myVideo2');
+            var player2 = videojs(videoElement2); 
+
+            
             var locationDivs = divElement.getElementsByClassName('xlickable');
 
             var usernameDivs = usernameElement.getElementsByClassName('clickable');
             for (var i = 0; i < usernameDivs.length; i++) {
                 var div = usernameDivs[i];
                 div.addEventListener('click', function(event) {
+                    
+                    var clickedLoc = event.currentTarget.getAttribute('data-location');
                     var clickedUsername = event.currentTarget.getAttribute('userinfo');
                  //   var xviews = event.currentTarget.getAttribute('vcount');
                     var xfollow = event.currentTarget.getAttribute('nfollow');
-                    divElement.innerHTML = '';
+                 //   divElement.innerHTML = '';
+                    
 
                     var clickedLocation = event.currentTarget.getAttribute('data-location');
 
-                    divElement.innerHTML ='location:  '+ clickedLocation +'                                                 followers:  '+xfollow;
+                  //  divElement.innerHTML ='location:  '+ clickedLocation +'                                                 followers:  '+xfollow;
+                    
+//divElement.innerHTML = clickedUsername +'     '+xfollow + '     '+clickedLoc.slice(0, 12)
 
+
+/*
+
+    var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
+var likeButton = document.querySelector('.next-button');
+            likeButton.textContent = 'Like';
+                    */
+     
+
+                  if (window.which == "play1"){  
                     player.src([{
                         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
                         type: 'application/x-mpegURL'
                     }]);
                     player.play();
+                    window.which = "play2"
+                  }
+
+                    else if (window.which == "play2"){  
+
+                    player2.src([{
+                        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
+                        type: 'application/x-mpegURL'
+                    }]);
+                    player2.play(); 
+                    window.which = "play1"
+                    }
+
+                    
                 });
             }
         })
@@ -188,9 +282,30 @@
             console.log('Error:', error);
         });
 }
+
+           function previous2() {
+           offset -= 19;
+            pagex -= 1;
+            if (pagex < 1) {
+                pagex = 1
+            }
+            
+            console.log("page no "+pagex)
+          //  updatePageNumber();
+            if (offset < 0) {
+                offset = 0;
+            }
+            clearUsernames();
+            //getJSON(offset); 
+              // var selectElement = document.getElementById("mobFavDropdown");
+          //  var displayedText = selectElement.options[selectElement.selectedIndex].text;
+          //  getJSON(offset, undefined, displayedText);
+               getJSON(offset)
+           }
+
         
         function previous() {
-            offset -= 19;
+         /*   offset -= 19;
             pagex -= 1;
             if (pagex < 1) {
                 pagex = 1
@@ -202,10 +317,53 @@
                 offset = 0;
             }
             clearUsernames();
-            getJSON(offset);
+            getJSON(offset); */
+
+      var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
+    var dropdown = document.getElementById('mobFavDropdown');
+          //  var divElement = document.getElementById('myDiv');
+
+    // Clear existing options
+  //  dropdown.innerHTML = '';
+          //  if (divElement.innerHTML !== ''){
+
+    if (mobArr.length > 0) {
+        // Create and add an option for each item in mobArr
+        mobArr.forEach(function(item) {
+            var option = document.createElement('option');
+            option.text = item;
+            dropdown.add(option);
+        });
+    } else {
+        var option = document.createElement('option');
+        option.text = 'mobFav is empty.';
+        dropdown.add(option);
+    }
+
+         //   }
         }
+
+             function next2() {
+             //    alert("wow")
+            
+            offset += 20;
+            pagex += 1;
+            console.log("page no "+pagex)
+         //   updatePageNumber();
+            clearUsernames
+            clearUsernames();
+                //  var selectElement = document.getElementById("mobFavDropdown");
+            //var displayedText = selectElement.options[selectElement.selectedIndex].text;
+          //  getJSON(offset, undefined, displayedText);
+               //  alert("wow3")
+                 getJSON(offset);
+
+             //   alert("wow2")
+            
+             }
         
         function next() {
+            /*
             offset += 20;
             pagex += 1;
             console.log("page no "+pagex)
@@ -213,7 +371,31 @@
             clearUsernames
             clearUsernames();
             getJSON(offset);
+            */
+
+//  var divElement = document.getElementById('myDiv');
+
+            /*
+    var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
+var likeButton = document.querySelector('.next-button');
+    if (!mobArr.includes(divElement.innerHTML)) {
+        mobArr.push(divElement.innerHTML);
+        localStorage.setItem('mobFav', mobArr.join(','));
+        likeButton.textContent = 'Unlike';
+    } else {
+        const index = mobArr.indexOf(divElement.innerHTML);
+        if (index !== -1) {
+            mobArr.splice(index, 1);
+            localStorage.setItem('mobFav', mobArr.join(','));
+            likeButton.textContent = 'Like';
         }
+        
+    } */
+previous()
+            
+        }
+    //    previous()
+        
         function updatePageNumber() {
             var pageNumberElement = document.getElementById('pageNumber');
             pageNumberElement.textContent = `(${pagex})`;
@@ -237,7 +419,7 @@
             getJSON(offset);
         });
 
-     let touchstartX = 0;
+        let touchstartX = 0;
 let touchendX = 0;
 
 document.addEventListener("touchstart", function(event) {
@@ -254,61 +436,177 @@ document.addEventListener("touchend", function(event) {
 });
 
 function handleSwipe() {
-    const threshold = 50;
+    const threshold = 100;
     const deltaX = touchstartX - touchendX;
 
     if (deltaX > threshold) {
-        next(); // Right swipe (next function)
+        next2(); // Right swipe (next function)
     } else if (-deltaX > threshold) {
-        previous(); // Left swipe (previous function)
+        previous2(); // Left swipe (previous function)
     }
 }
 
-        window.onload = function() {
+window.onload = function() {
+    
+starty()
+}
+        function starty() {
+                var videoElement = document.getElementById('myVideo');
+    var player = videojs(videoElement); 
+var videoElement2 = document.getElementById('myVideo2');
+    var player2 = videojs(videoElement2); 
+/*
+        var selectElement = document.getElementById('mobFavDropdown');
 
-apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=1&gender=f&tag=ebony";
+        let tagsArray = ["#18","#19","#asian","#bigboobs","#ebony","#mature","#latina","#milf","#hairy","#anal","#new","#squirt","#bbw","#milk","#smalltits","#teen","#skinny","#pantyhose","#feet","#bigass","#fuckmachine","#pregnant","#german","#deepthroat","#young","#mistress","#shy","#redhead","#french","#smoke","#british","#curvy","#bigpussylips","#cc","#indian","#ahegao","#natural","#pinay","#goth","#muscle","#cosplay","#nonude","#lovense","#bdsm","#blonde","#petite","#femdom","#heels","#daddy","#joi","#hairyarmpits","#dirty","#saliva","#latex","#bigclit","#puffynipples","#slave","#bigtits","#mommy","#sph","#lesbian","#submissive","#hairypussy","#stockings","#atm","#cute","#bignipples","#fit","#tattoo","#strapon","#ukraine","#cei","#findom","#chubby","#cuckold","#braces","#daddysgirl","#cum","#bush","#office","#dirtytalk","#italian","#anime","#slut","#humiliation","#flexible","#nasty","#dutch","#sissy","#blowjob","#leggings","#piercing","#footjob","#glasses","#arab","#pawg","#gaming","#tease","#spit","#twerk","#bbc","#dance","#longhair","#aussie","#shorthair","#fitness","#tall","#socks","#fetish","#pussy","#ass","#nonnude","#lush","#pvt","#bigpussy","#schoolgirl","#legs","#gamer","#colombia","#party","#turkish","#roleplay","#balloons","#slim","#russian","#cameltoe","#brunette","#student","#chastity","#hentai","#dildo","#leather","#kinky","#leagueoflegends","#horny","#messy","#goddess","#tomboy","#domi","#nylon","#wifematerial","#panties","#boots","#footfetish","#tiny","#armpits","#korean","#japanese","#valorant","#ssbbw","#creamy","#smoking","#naked","#smallboobs","#erotic","#asmr","#domination","#tattoos","#muscles","#abs","#pegging","#sexy","#shaved","#belly","#redhair","#dp","#bondage","#amputee","#creampie","#boobs","#athletic","#couple","#bigbelly","#longlegs","#piercings","#jeans","#bigcock","#tits","#wet","#sloppy","#bigdildo","#ginger","#porn","#cumshow","#sensual","#private","#ohmibod","#lingerie","#hugeboobs","#oil","#small","#nora","#asshole","#latin","#thick","#chat","#curly","#girlnextdoor","#dominatrix","#orgasm","#yoga","#yoga","#germany","#femboy","#bigtoys","#interactivetoy","#control","#love","#strip","#smoker","#black","#fat","#bigtoy","#masturbation","#college","#naughty","#dominant","#fuck","#naturaltits","#whore","#longtongue","#biglips","#english","#pornstar","#little","#tights","#naturalboobs","#masturbate","#hush","#master","#nipples","#colombiana","#american","#twink","#lovensecontrol","#toes","#talk","#soles","#edging","#pierced","#france","#canadian","#beauty","#nolush","#fingering","#dildoplay","#assplay","#makemecum","#chill","#tipgoal","#innocent","#mixed","#ink","#sub","#dom","#booty","#girl","#big","#bigboob","#recommended","#sex","#babe","#smile","#trimmed","#toys","#cutie","#seductive","#naturalgirls","#newgirl","#bigbutt","#thin","#bignaturalboobs","#tanlines","#flirt","#twerking","#blond","#nature","#show","#pierce","#beautiful","#pussyplay","#ride","#vacuum","#hot","#fingerass","#ridedildo","#play","#sexmachine","#creamypussy","#cowgirl","#colorhair","#teens","#me","#cream","#sweet","#nude","#splits","#wetpussy","#feets","#roll","#plug","#plug","#sport","#toy","#niceass","#voyeur","#foot","#spank","#talkdirty","#lushcontrol","#blueeyes","#brat","#pinkpussy","#password","#passion","#bj","#doggy","#african","#rust","#longnails","#blue","#wheel","#smiling","##","#creamycum","#sexyboobs","#sexygirl","#cuckolding","#latins","#hugetits","#skirt","#rollthedice","#curve","#newmodel","#hotgirl","#interactive","#privateshow","#sexytits","#nice","#girlfriendmaterial","#amateur","#fucking","#swimmingpool","#goodvibes","#rimworld","#emo","#showboobs","#phatass","#pvtopen","#single","#welcome","#blondegirl","#tickle","#bigsquirt","#snap","#hometogether","#smallbreasts","#sexyass","#showcum","#sneakers","#outside","#pink","#asia","#girls","#poledance","#milkyboobs","#secretary","#bigbooty","#singlemom","#freaky","#analtoys","#balls","#playful","#nomakeup","#gym","#sissification","#topless","#bisexual","#blondie","#cougar","#brackets","#hardnipples","#work","#tittyfuck","#obedient","#dress","#domi","#striptease","#smalltitties","#eyes","#moan","#hair","#rock","#feed","#littletits","#straight","#butt","#foreplay","#septum","#fullbush","#nipplepiercing","#dress","#rock","#wild","#penetration","#happy","#riding","#cougar","#brackets","#fountain","#balls","#sexylatina","#analtoys","#hornywife","#bigbreasts","#domi","#hotbody","#smallass","#dolce","#ready","#lovenselush","#hairyarmpit","#pvtshow","#hotpussy","#pvton","#busty","#funny","#bunny","#nudeinpvt","#hair","#single","#moan","#body","#spanks","#naturalgirl","#slime","#underwear","#blackhair","#fingers","#smart","#candy","#thickthighs","#butt","#spanking","#chatting","#model","#fullbush","#cutesmile","#exotic","#oilshow","#silly","#barbie","#bubblebutt","#shave","#feel","#joy","#bi","#talkative","#breasts","#lushon","#glass","#milfs","#hotmom","#uncut","#fuckass","#hetero","#double","#years","#medium","#vape","#breast","#classy","#gay","#bigdick","#curved","#facial","#bald","#sucktits","#tummy","#latino","#dominate","#sexyeyes","#messydeepthroat","#exercise","#pink","#vibe","#lovenseon","#today","#cfnm","#nakedshow","#finger","#gloves","#pinkhair","#home","#boob","#madure","#curves","#lesbians","#rubclit","#showfeet","#passwordshow","#darkprincess","#latinas","#vibe","#friend","#messydeepthroat","#pink","#lovenseon","#goals","#camcam","#flash","#singer","#feetfetish","#slender","#sweetheart","#fresh","#fatpussy","#crazy","#guitar","#relax","#shake","#teengirl","#fingerpussy","#sucknipples"]
 
-fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
-    data.results.forEach(result => {
-        player.src([{
-                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + result.username + '/playlist.m3u8',
-                                type: 'application/x-mpegURL'
-                            }]);
-                            player.play();
-    });
-  }); 
+var uniqueTagsSet = new Set(tagsArray.map(tag => tag.slice(1))); // Remove '#' and create a Set
+
+var uniqueTagsArray = Array.from(uniqueTagsSet).sort(); // Convert Set back to an array and sort it
+
+uniqueTagsArray.forEach(function (tag) {
+    var selectElement = document.getElementById("mobFavDropdown");
+    var option = document.createElement("option");
+    option.value = tag;
+    option.textContent = tag;
+ //   selectElement.appendChild(option);
+});
+
+            var options = Array.from(selectElement.options);
+
+options.sort(function(a, b) {
+    return a.text.localeCompare(b.text);
+});
+
+options.forEach(function(option) {
+//    selectElement.appendChild(option);
+});
 
 
 
             
-    var videoElement = document.getElementById('myVideo');
+var dropdown = document.getElementById('mobFavDropdown');
+
+
+
+            
+       var videoElement = document.getElementById('myVideo');
     var player = videojs(videoElement); 
+var videoElement2 = document.getElementById('myVideo');
+    var player2 = videojs(videoElement2); 
+            
     const volumeSlider = document.getElementById('volumeSlider');
+//volumeSlider.style.display = "none";
 
-           // volumeSlider.style.display = "none";
+const muteButton = document.getElementById('muteButton');
+dropdown.addEventListener('change', function() {
+     var selectedOption = dropdown.options[dropdown.selectedIndex].text;
+clearUsernames();
+    getJSON(0, selectedOption)
+});
+            
+    var playerContainer = player.el();
+playerContainer.click();
+*/
 
-    volumeSlider.addEventListener('input', function() {
-  if (player.muted()) {
-        const muteButton = document.getElementById('muteButton');
-       muteButton.textContent = 'Mute';
-        player.muted(false);
-      player.volume(volumeSlider.value);
+apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f";
+
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    if (data.results[0]) {
+      player.src([{
+        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[0].username + '/playlist.m3u8',
+        type: 'application/x-mpegURL'
+      }]);
       player.play();
-        if (player.paused()) {
-                player.play();
-            }
+
+      // Do something with the first result here
     }
 
-        player.volume(volumeSlider.value);
-          if (player.paused()) {
+    if (data.results[1]) {
+       //   setTimeout(function() {
+      player2.src([{
+        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[1].username + '/playlist.m3u8',
+        type: 'application/x-mpegURL'
+      }]);
+      player2.play();
+          //    }, 2000);
+
+      // Do something different with the second result here
+    }
+  });
+
+
+    player.on('pause', function() {
+        player.play().catch(function(error) {
+            console.error('Failed to play video:', error);
+        });
+    });
+
+
+
+            /*
+
+    volumeSlider.addEventListener('input', function() {
+        if (window.which == "play1"){
+            player.muted(true);
+        if (player2.paused()) {
+                player2.play();
+            }
+        if (player2.play()) {
+                player2.play();
+            }
+  if (muteButton.textContent == 'Unmute') {
+     player2.muted(false);
+        player2.volume(volumeSlider.value);
+        muteButton.textContent = 'Mute';
+      if (player2.paused()) {
+                player2.play();
+            }
+
+    }
+ else if (muteButton.textContent == 'Mute') {
+        player2.volume(volumeSlider.value);
+     if (player2.paused()) {
+                player2.play();
+            }
+
+}
+        }
+        else if (window.which == "play2"){  
+player2.muted(true);
+
+  if (player.paused()) {
                 player.play();
             }
+        if (player.play()) {
+                player.play();
+            }
+  if (muteButton.textContent == 'Unmute') {
+     player.muted(false);
+        player.volume(volumeSlider.value);
+        muteButton.textContent = 'Mute';
+      if (player.paused()) {
+                player.play();
+            }
+
+    }
+ else if (muteButton.textContent == 'Mute') {
+        player.volume(volumeSlider.value);
+     if (player.paused()) {
+                player.play();
+            }
+
+}
+
+
+
+
+        }
     });
+    */
 };
-
-
 
 
 let isMuted = false;
@@ -318,30 +616,48 @@ function toggleMute() {
     var videoElement = document.getElementById('myVideo');
 var player = videojs(videoElement);
 const muteButton = document.getElementById('muteButton');
-        const volumeSlider = document.getElementById('volumeSlider');
+const volumeSlider = document.getElementById('volumeSlider');
 
 
-    if (isMuted) {
+    if (muteButton.textContent == 'Mute') {
         player.muted(true);
         muteButton.textContent = 'Unmute';
-           // volumeSlider.style.display = "none";
-    } else {
+      //  volumeSlider.style.display = "none";
+    } else if (muteButton.textContent == 'Unmute') {
         player.muted(false);
         player.volume(volumeSlider.value);
         muteButton.textContent = 'Mute';
-          //  volumeSlider.style.display = "block";
+      //  volumeSlider.style.display = "block";
     }
-    isMuted = !isMuted;
+  //  isMuted = !isMuted;
 }
+function slide() {
+       var videoElement = document.getElementById('myVideo');
+var player = videojs(videoElement);
+const muteButton = document.getElementById('muteButton');
+
+    if (muteButton.textContent == 'Unmute') {
+        player.muted(false);
+        player.volume(volumeSlider.value);
+        muteButton.textContent = 'Mute';
+    }
+   
+}
+
+
 
     </script>
 </head>
 <body>
-
     <div id="container">
         <div id="videoPlayer">
-            <video id="myVideo" class="video-js vjs-default-skin" controls preload="auto" muted autoplay  style="object-fit: fill;">
-                <source src="monkeylina.mp4"></source>
+            <video id="myVideo" class="video-js vjs-default-skin" controls preload="auto" muted autoplay style="object-fit: fill;">
+             <!--     <source src="monkeylina.mp4"></source> -->
+            </video>
+        </div>
+         <div id="videoPlayer2">
+            <video id="myVideo2" class="video-js vjs-default-skin" controls preload="auto" muted autoplay style="object-fit: fill;">
+                <!--     <source src="monkeylina.mp4"></source> -->
             </video>
         </div>
         <div id="otherContent">
@@ -351,16 +667,35 @@ const muteButton = document.getElementById('muteButton');
             <!-- Add your other content here -->
         </div>
     </div>
-    <button class="previous-button" onclick="previous()">Previous</button>
-<button class="next-button" onclick="next()">Next</button>
+       <div style="display: flex; align-items: center;"> 
+     <!--  <button class="previous-button" onclick="previous()">Tags</button> -->
+   <!--  <select id="mobFavDropdown"> -->
+  <!--  <option value="ebony">ebony</option>
+  <option value="gaming">gaming</option>
+  <option value="bbw">bbw</option>
+        
+        <option value="latina">latina</option>
+        <option value="goth">goth</option>
+        <option value="18">18</option>
+        <option value="schoolgirl">schoolgirl</option>
+        <option value="office">office</option>
+        <option value="lesbians">lesbians</option>
+        <option value="masturbate">masturbate</option>
+        <option value="bigass">bigass</option> -->
+ <!-- </select> -->
+ <!-- <button class="next-button" onclick="next()">Like</button> -->
 
-    <div class="page-number" id="pageNumber" style="color: white; display: inline-block; margin-left: 15px; margin-right: 15px;">(1)</div>
-    <button class="page-button" onclick="redirectToOtherPage()">Other</button>
-      <button class="mute-button"  id="muteButton" onclick="toggleMute()">Unmute</button>
-    <div id="volumeControl">
-         <div id="myDiv" class="myClass"> </div>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.2">
-    </div>
+ <!-- <div class="page-number" id="pageNumber" style="color: white; display: inline-block; margin-left: 15px; margin-right: 15px;">(1)</div> -->
+ <!--    <button class="page-button" onclick="redirectToOtherPage()">Fav</button> -->
+
+ 
+ <!--  <button class="mute-button" id="muteButton" onclick="toggleMute()">Unmute</button> -->
+ <div id="myDiv" class="myClass"></div>
+<!-- </div>
+      <div id="volumeControl">
+        
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.2" onclick="slide()">
+    </div> -->
+    
 </body>
 </html>
-
