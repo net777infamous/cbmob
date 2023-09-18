@@ -509,6 +509,8 @@ playerContainer.click();
 */
 
 apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=1&gender=f";
+            apiUrl2 = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=1&gender=f&offset=1";
+
 
 fetch(apiUrl)
   .then(response => response.json())
@@ -525,6 +527,27 @@ fetch(apiUrl)
 
     player.on('pause', function() {
         player.play().catch(function(error) {
+            console.error('Failed to play video:', error);
+        });
+    });
+
+
+
+            fetch(apiUrl2)
+  .then(response => response.json())
+  .then(data => {
+    data.results.forEach(result => {
+        player2.src([{
+                                src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + result.username + '/playlist.m3u8',
+                                type: 'application/x-mpegURL'
+                            }]);
+                            player2.play();
+    });
+  }); 
+
+
+    player2.on('pause', function() {
+        player2.play().catch(function(error) {
             console.error('Failed to play video:', error);
         });
     });
