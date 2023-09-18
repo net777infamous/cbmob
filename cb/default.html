@@ -419,7 +419,7 @@ document.addEventListener("touchend", function(event) {
 });
 
 function handleSwipe() {
-    const threshold = 50;
+    const threshold = 150;
     const deltaX = touchstartX - touchendX;
 
     if (deltaX > threshold) {
