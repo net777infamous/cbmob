@@ -203,7 +203,7 @@ var countsArray = data.results.map(function(username, index) {
   
 
             var usernameElement = document.getElementById('username');
-           // var divElement = document.getElementById("myDiv");
+            var divElement = document.getElementById("myDiv");
             
            // divElement.innerHTML = '';
             
@@ -319,11 +319,11 @@ var likeButton = document.querySelector('.next-button');
 
       var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
     var dropdown = document.getElementById('mobFavDropdown');
-            var divElement = document.getElementById('myDiv');
+          //  var divElement = document.getElementById('myDiv');
 
     // Clear existing options
   //  dropdown.innerHTML = '';
-            if (divElement.innerHTML !== ''){
+          //  if (divElement.innerHTML !== ''){
 
     if (mobArr.length > 0) {
         // Create and add an option for each item in mobArr
@@ -338,7 +338,7 @@ var likeButton = document.querySelector('.next-button');
         dropdown.add(option);
     }
 
-            }
+         //   }
         }
 
              function next2() {
@@ -368,7 +368,9 @@ var likeButton = document.querySelector('.next-button');
             getJSON(offset);
             */
 
-  var divElement = document.getElementById('myDiv');
+//  var divElement = document.getElementById('myDiv');
+
+            /*
     var mobArr = localStorage.getItem('mobFav') ? localStorage.getItem('mobFav').split(',') : [];
 var likeButton = document.querySelector('.next-button');
     if (!mobArr.includes(divElement.innerHTML)) {
@@ -382,6 +384,7 @@ var likeButton = document.querySelector('.next-button');
             localStorage.setItem('mobFav', mobArr.join(','));
             likeButton.textContent = 'Like';
         }
+        */
     }
 previous()
             
