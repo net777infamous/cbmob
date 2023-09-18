@@ -524,13 +524,13 @@ fetch(apiUrl)
     }
 
     if (data.results[1]) {
-          setTimeout(function() {
+       //   setTimeout(function() {
       player2.src([{
         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[1].username + '/playlist.m3u8',
         type: 'application/x-mpegURL'
       }]);
       player2.play();
-              }, 2000);
+          //    }, 2000);
 
       // Do something different with the second result here
     }
