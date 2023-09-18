@@ -18,8 +18,8 @@
             
 }
         .vjs-control-bar {
-    opacity: 0 !important; /* Ensure full opacity */
-             transition: none !important; /* Remove any transition effect */
+   /* opacity: 0 !important;  Ensure full opacity */
+             transition: none !important;  /*Remove any transition effect */
     pointer-events: auto !important; /* Allow interaction */
             display: none;
 }
@@ -226,6 +226,12 @@ var countsArray = data.results.map(function(username, index) {
            var videoElement2 = document.getElementById('myVideo2');
             var player2 = videojs(videoElement2); 
 
+
+if (!player.muted()) {
+    window.which = "play2";
+} else if (!player2.muted()) {
+    window.which = "play1";
+}
             
             var locationDivs = divElement.getElementsByClassName('xlickable');
 
