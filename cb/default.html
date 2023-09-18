@@ -163,7 +163,25 @@
         var offset = 0;
         var pagex = 1;
 
+let topp = document.createElement('div')
+        topp2.innerHTML = ''
+let xButton = document.createElement('button');
+xButton.innerHTML = '📌'
 
+        topp.appendChild(xButton);
+
+//topp.appendChild(kButton);
+topp.style.width = '320px';
+topp.style.height = '22px'
+
+
+topp.style.position = 'absolute';
+//topp.style.backgroundColor = 'rgba(43, 51, 63, 0.7)';
+topp.style.textAlign = 'center';
+topp.style.left = '40%';
+topp.style.top = '50%';
+topp.style.opacity = '1'
+        
             
 
         var counts = [];
@@ -225,6 +243,10 @@ var countsArray = data.results.map(function(username, index) {
 
            var videoElement2 = document.getElementById('myVideo2');
             var player2 = videojs(videoElement2); 
+
+
+            videoElement.appendChild(topp)
+            videoElement2.appendChild(topp)
 
    
             
