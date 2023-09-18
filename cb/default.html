@@ -208,7 +208,7 @@ var countsArray = data.results.map(function(username, index) {
             divElement.innerHTML = '';
             
             usernameElement.innerHTML = usernames.map(function(username, index) {
-                var fontSize = (username.length > 10) ? '12px' : '18px';
+                var fontSize = (username.length > 10) ? '6px' : '12px';
                 return `
                     <div class="clickable" data-location="${locations[index]}" userinfo="${username}" nfollow="${nfollowers[index]}">
                         <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
