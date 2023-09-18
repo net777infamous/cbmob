@@ -4,7 +4,7 @@
     <title>Video.js Player</title>
     <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/7.14.3/video.js"></script>
-<link rel="icon" type="image/png" href=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH5ACqbJtIue4w45hu4Uiu6ww7ybVSqCtc7Q&usqp=CAU">
+    <link rel="icon" type="image/png" href="https://external-preview.redd.it/XUQLp8p22r6v9khF7cy_V17jhAmBthuTBcsP1mvz_T8.jpg?width=640&crop=smart&auto=webp&s=a6ff8bd2f490ccdda21d0ab4ee29485fe46ce064">
     <style>
         #container {
             position: relative;
@@ -18,12 +18,12 @@
             
 }
         .vjs-control-bar {
-    opacity: 0 !important; /* Ensure full opacity */
-             transition: none !important; /* Remove any transition effect */
+   /* opacity: 0 !important;  Ensure full opacity */
+             transition: none !important;  /*Remove any transition effect */
     pointer-events: auto !important; /* Allow interaction */
             display: none;
 }
-
+    
          #videoPlayer {
             flex: 1;
             padding: 3px;
@@ -172,11 +172,11 @@
          
 let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=ebony&offset=${offset}`;
  if (arg && arg.length > 1) {
- url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${arg}`;
+ url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&tag=ebony&offset=${offset}&tag=${arg}`;
  }
     if (tag) {
         
-        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${tag}`;
+        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&tag=ebony&offset=${offset}&tag=${tag}`;
     }
         
     fetch(url)
@@ -226,6 +226,7 @@ var countsArray = data.results.map(function(username, index) {
            var videoElement2 = document.getElementById('myVideo2');
             var player2 = videojs(videoElement2); 
 
+   
             
             var locationDivs = divElement.getElementsByClassName('xlickable');
 
@@ -233,6 +234,28 @@ var countsArray = data.results.map(function(username, index) {
             for (var i = 0; i < usernameDivs.length; i++) {
                 var div = usernameDivs[i];
                 div.addEventListener('click', function(event) {
+
+                             if (!player.muted() && !player2.muted()) {
+    // Both players are unmuted
+return
+} else if (!player.muted()) {
+    // Only player 1 is unmuted
+    window.which = "play2";
+} else if (!player2.muted()) {
+    // Only player 2 is unmuted
+    window.which = "play1";
+} else {
+    // Both players are muted
+   if (window.which == "play1"){
+       window.which = "play2"
+
+   }
+                                 else if (window.which == "play2"){
+                                     window.which = "play1"
+
+                                 }
+                
+}
                     
                     var clickedLoc = event.currentTarget.getAttribute('data-location');
                     var clickedUsername = event.currentTarget.getAttribute('userinfo');
@@ -262,7 +285,7 @@ var likeButton = document.querySelector('.next-button');
                         type: 'application/x-mpegURL'
                     }]);
                     player.play();
-                    window.which = "play2"
+                 //   window.which = "play2"
                   }
 
                     else if (window.which == "play2"){  
@@ -272,7 +295,7 @@ var likeButton = document.querySelector('.next-button');
                         type: 'application/x-mpegURL'
                     }]);
                     player2.play(); 
-                    window.which = "play1"
+                   // window.which = "play1"
                     }
 
                     
@@ -510,7 +533,7 @@ clearUsernames();
 playerContainer.click();
 */
 
-apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f&tag=ebony";
+apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&tag=ebony&gender=f";
 
 fetch(apiUrl)
   .then(response => response.json())
