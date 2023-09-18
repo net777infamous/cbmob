@@ -208,7 +208,7 @@ var countsArray = data.results.map(function(username, index) {
             divElement.innerHTML = '';
             
             usernameElement.innerHTML = usernames.map(function(username, index) {
-                var fontSize = (username.length > 10) ? '6px' : '12px';
+                var fontSize = (username.length > 10) ? '12px' : '18px';
                 return `
                     <div class="clickable" data-location="${locations[index]}" userinfo="${username}" nfollow="${nfollowers[index]}">
                         <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
@@ -457,7 +457,7 @@ uniqueTagsArray.forEach(function (tag) {
     var option = document.createElement("option");
     option.value = tag;
     option.textContent = tag;
-    selectElement.appendChild(option);
+ //   selectElement.appendChild(option);
 });
 
             var options = Array.from(selectElement.options);
@@ -467,7 +467,7 @@ options.sort(function(a, b) {
 });
 
 options.forEach(function(option) {
-    selectElement.appendChild(option);
+//    selectElement.appendChild(option);
 });
 
 
