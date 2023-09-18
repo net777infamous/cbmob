@@ -17,9 +17,10 @@
             
 }
         .vjs-control-bar {
-    opacity: 1 !important; /* Ensure full opacity */
+    opacity: 0 !important; /* Ensure full opacity */
              transition: none !important; /* Remove any transition effect */
     pointer-events: auto !important; /* Allow interaction */
+            display: none;
 }
 
          #videoPlayer {
@@ -515,7 +516,7 @@ fetch(apiUrl)
   .then(data => {
     if (data.results[0]) {
       player.src([{
-        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[0].username + '/playlist.m3u8',
+        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[1].username + '/playlist.m3u8',
         type: 'application/x-mpegURL'
       }]);
       player.play();
@@ -526,7 +527,7 @@ fetch(apiUrl)
     if (data.results[1]) {
        //   setTimeout(function() {
       player2.src([{
-        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[1].username + '/playlist.m3u8',
+        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[0].username + '/playlist.m3u8',
         type: 'application/x-mpegURL'
       }]);
       player2.play();
