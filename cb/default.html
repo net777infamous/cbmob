@@ -158,7 +158,7 @@
 
     </style>
     <script>
-      window.which = "play2";
+    //  window.which = "play2";
 
         var offset = 0;
         var pagex = 1;
@@ -231,6 +231,20 @@ if (!player.muted()) {
     window.which = "play2";
 } else if (!player2.muted()) {
     window.which = "play1";
+}
+
+            if (!player.muted() && !player2.muted()) {
+    // Both players are unmuted
+return
+} else if (!player.muted()) {
+    // Only player 1 is unmuted
+    window.which = "play2";
+} else if (!player2.muted()) {
+    // Only player 2 is unmuted
+    window.which = "play1";
+} else {
+    // Both players are muted
+    alert("nun");
 }
             
             var locationDivs = divElement.getElementsByClassName('xlickable');
