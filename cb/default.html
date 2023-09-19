@@ -27,9 +27,9 @@
             // Clear the current list
             tagList.innerHTML = '';
 
-            // Filter and add matching tags to the list
+            // Filter and add matching tags to the list, excluding '#'
             const filteredTags = tagsArray
-                .filter(tag => tag.toLowerCase().includes(searchQuery))
+                .filter(tag => tag !== '#' && tag.toLowerCase().includes(searchQuery))
                 .sort((a, b) => {
                     if (a === '#default') return -1; // Ensure #default is at the top
                     if (b === '#default') return 1; // Ensure #default is at the top
