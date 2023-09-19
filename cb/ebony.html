@@ -353,14 +353,7 @@ clickableDivs.forEach(function(div) {
   }
 
         }
-            zButton1.onclick = function () {
-                alert("added to favourites")
-
-            }
-
-            zButton2.onclick = function () {
-                alert("added to favourites")
-            }
+        
 
             videoElement.appendChild(topp1);
 videoElement2.appendChild(topp2);
@@ -398,6 +391,36 @@ return
                     
                     var clickedLoc = event.currentTarget.getAttribute('data-location');
                     var clickedUsername = event.currentTarget.getAttribute('userinfo');
+
+
+
+zButton1.onclick = function () {
+  var favMod = localStorage.getItem("mobFav");
+  var favArr = favMod ? favMod.split(",") : [];
+  
+  if (!favArr.includes(clickedUsername)) {
+    favArr.push(String(clickedUsername));
+    localStorage.setItem("mobFav", favArr.join(","));
+    alert("Added to favorites");
+  } else {
+    alert("Already in favorites");
+  }
+};
+
+                    zButton2.onclick = function () {
+  var favMod = localStorage.getItem("mobFav");
+  var favArr = favMod ? favMod.split(",") : [];
+  
+  if (!favArr.includes(clickedUsername)) {
+    favArr.push(String(clickedUsername));
+    localStorage.setItem("mobFav", favArr.join(","));
+    alert("Added to favorites");
+  } else {
+    alert("Already in favorites");
+  }
+};
+
+                    
                  //   var xviews = event.currentTarget.getAttribute('vcount');
                     var xfollow = event.currentTarget.getAttribute('nfollow');
                  //   divElement.innerHTML = '';
