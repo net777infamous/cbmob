@@ -159,17 +159,15 @@
     </style>
     <script>
 
+var selectedTag;
+
 const urlParams = new URLSearchParams(window.location.search);
-     // Use the selectedTag in your page
-        var selectedTag;
 
-
-if (selectedTag) {
-      selectedTag = urlParams.get('tag');
+if (urlParams.has('tag')) {
+    selectedTag = urlParams.get('tag');
 } else {
     selectedTag = "ebony";
 }
-
 
 
       window.which = "play2";
