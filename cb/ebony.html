@@ -743,29 +743,40 @@ fetch(apiUrl)
 
 
 
-      zButton1.onclick = function () {
+zButton1.onclick = function () {
   var favMod = localStorage.getItem("mobFav");
   var favArr = favMod ? favMod.split(",") : [];
-  
+
   if (!favArr.includes(data.results[0].username)) {
     favArr.push(String(data.results[0].username));
     localStorage.setItem("mobFav", favArr.join(","));
     alert("Added to favorites");
   } else {
-    alert("Already in favorites");
+    var indexToRemove = favArr.indexOf(data.results[0].username);
+    if (indexToRemove !== -1) {
+      favArr.splice(indexToRemove, 1);
+      localStorage.setItem("mobFav", favArr.join(","));
+      alert("Removed from favorites");
+    }
   }
 };
 
-                    zButton2.onclick = function () {
+
+zButton2.onclick = function () {
   var favMod = localStorage.getItem("mobFav");
   var favArr = favMod ? favMod.split(",") : [];
-  
-  if (!favArr.includes(data.results[0].username)) {
-    favArr.push(String(data.results[0].username));
+
+  if (!favArr.includes(data.results[1].username)) {
+    favArr.push(String(data.results[1].username));
     localStorage.setItem("mobFav", favArr.join(","));
     alert("Added to favorites");
   } else {
-    alert("Already in favorites");
+    var indexToRemove = favArr.indexOf(data.results[1].username);
+    if (indexToRemove !== -1) {
+      favArr.splice(indexToRemove, 1);
+      localStorage.setItem("mobFav", favArr.join(","));
+      alert("Removed from favorites");
+    }
   }
 };
 
