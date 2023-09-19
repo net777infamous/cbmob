@@ -166,7 +166,7 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('tag')) {
     selectTag = urlParams.get('tag');
 } else {
-    selectTag = "default";
+    selectTag = "#";
 }
 
 
@@ -225,7 +225,7 @@ topp2.style.opacity = '1';
          
 let url;
 
-if (selectTag == "default") {
+if (selectTag == "#") {
     url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
 } else {
     url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag}&offset=${offset}`;
@@ -649,7 +649,7 @@ playerContainer.click();
 //apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f"+"&tag="+selectedTag;
 let apiUrl;
 
-if (selectTag == "default") {
+if (selectTag == "#") {
     apiUrl = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f`;
 } else {
     apiUrl = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f&tag=${selectTag}`;
