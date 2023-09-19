@@ -309,22 +309,39 @@ clickableDivs.forEach(function(div) {
             var divElement = document.getElementById("myDiv");
             
            // divElement.innerHTML = '';
-            if (selectTag == "favorites") {
+       if (selectTag == "favorites") {
+  var favMod = localStorage.getItem("mobFav");
+  var favArr = favMod ? favMod.split(",") : [];
+  
+  // Use Promise.all to check response status for all usernames in favArr
+  Promise.all(favArr.map(username => fetch(`https://cbjpeg.stream.highwebmedia.com/stream?room=${username}`)
+    .then(response => {
+      if (response.status === 200) {
+        return username;
+      } else {
+        return null; // Exclude usernames with non-200 response
+      }
+    })
+  ))
+  .then(filteredUsernames => {
+    // filteredUsernames will contain usernames with successful response status (200)
 
-                var favMod = localStorage.getItem("mobFav");
-var favArr = favMod ? favMod.split(",") : [];
+    // Remove null values from the filteredUsernames
+    filteredUsernames = filteredUsernames.filter(username => username !== null);
 
-usernameElement.innerHTML = favArr.map(function(username) {
-  var fontSize = (username.length > 10) ? '12px' : '18px';
-  return `
-    <div class="clickable" userinfo="${username}">
-      <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
-      <div style="font-size: ${fontSize};">${username}</div>
-    </div>`;
-}).join("");
-//return
-                
-            }
+    // Update usernameElement with filteredUsernames
+    usernameElement.innerHTML = filteredUsernames.map(username => {
+      var fontSize = (username.length > 10) ? '12px' : '18px';
+      return `
+        <div class="clickable" userinfo="${username}">
+          <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+          <div style="font-size: ${fontSize};">${username}</div>
+        </div>`;
+    }).join("");
+  });
+}
+
+           
             else{
             usernameElement.innerHTML = usernames.map(function(username, index) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
