@@ -705,6 +705,34 @@ if (selectTag == "default") {
 }
 
 
+zButton1.onclick = function () {
+  var favMod = localStorage.getItem("mobFav");
+  var favArr = favMod ? favMod.split(",") : [];
+  
+  if (!favArr.includes(data.results[0].username)) {
+    favArr.push(String(data.results[0].username));
+    localStorage.setItem("mobFav", favArr.join(","));
+    alert("Added to favorites");
+  } else {
+    alert("Already in favorites");
+  }
+};
+
+                    zButton2.onclick = function () {
+  var favMod = localStorage.getItem("mobFav");
+  var favArr = favMod ? favMod.split(",") : [];
+  
+  if (!favArr.includes(data.results[0].username)) {
+    favArr.push(String(data.results[0].username));
+    localStorage.setItem("mobFav", favArr.join(","));
+    alert("Added to favorites");
+  } else {
+    alert("Already in favorites");
+  }
+};
+
+            
+
 fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
