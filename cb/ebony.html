@@ -329,6 +329,10 @@ usernameElement.innerHTML = favArr.map(function(username) {
 
            
             else{
+                if (usernames.length === 0) {
+    window.location.href = "https://net777infamous.github.io/cbmob/cb/ebony.html";
+                    return;
+                }
             usernameElement.innerHTML = usernames.map(function(username, index) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
                 return `
@@ -339,6 +343,7 @@ usernameElement.innerHTML = favArr.map(function(username) {
                     </div>`;
             }).join("");
             }
+            
            var videoElement = document.getElementById('myVideo');
             var player = videojs(videoElement); 
 
