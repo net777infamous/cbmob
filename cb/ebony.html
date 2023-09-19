@@ -705,7 +705,17 @@ if (selectTag == "default") {
 }
 
 
-zButton1.onclick = function () {
+
+
+            
+
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+
+
+
+      zButton1.onclick = function () {
   var favMod = localStorage.getItem("mobFav");
   var favArr = favMod ? favMod.split(",") : [];
   
@@ -731,11 +741,8 @@ zButton1.onclick = function () {
   }
 };
 
-            
 
-fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
+      
     if (data.results[0]) {
       player.src([{
         src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + data.results[0].username + '/playlist.m3u8',
