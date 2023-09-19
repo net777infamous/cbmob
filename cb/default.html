@@ -23,36 +23,30 @@
         // Function to update the displayed tags based on the search input
         function updateTagList() {
             const searchQuery = tagSearchInput.value.toLowerCase();
-            
+
             // Clear the current list
             tagList.innerHTML = '';
 
             // Filter and add matching tags to the list
-            tagsArray.forEach(tag => {
+            const filteredTags = tagsArray
+                .filter(tag => tag.toLowerCase().includes(searchQuery))
+                .sort((a, b) => {
+                    if (a === '#default') return -1; // Ensure #default is at the top
+                    if (b === '#default') return 1; // Ensure #default is at the top
+                    return a.localeCompare(b);
+                });
+
+            filteredTags.forEach(tag => {
                 const tagWithoutHash = tag.slice(1);
 
-                if (tagWithoutHash === 'default') {
-                    // Always include #default at the top
-                    if (searchQuery === '' || 'default'.includes(searchQuery)) {
-                        const li = document.createElement('li');
-                        const a = document.createElement('a');
+                const li = document.createElement('li');
+                const a = document.createElement('a');
 
-                        a.setAttribute('href', `https://net777infamous.github.io/cbmob/cb/ebony.html?tag=${tagWithoutHash}`);
-                        a.textContent = tagWithoutHash;
+                a.setAttribute('href', `https://net777infamous.github.io/cbmob/cb/ebony.html?tag=${tagWithoutHash}`);
+                a.textContent = tagWithoutHash;
 
-                        li.appendChild(a);
-                        tagList.appendChild(li);
-                    }
-                } else if (tagWithoutHash.toLowerCase().includes(searchQuery)) {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-
-                    a.setAttribute('href', `https://net777infamous.github.io/cbmob/cb/ebony.html?tag=${tagWithoutHash}`);
-                    a.textContent = tagWithoutHash;
-
-                    li.appendChild(a);
-                    tagList.appendChild(li);
-                }
+                li.appendChild(a);
+                tagList.appendChild(li);
             });
         }
 
