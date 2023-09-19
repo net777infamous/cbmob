@@ -158,6 +158,20 @@
 
     </style>
     <script>
+
+const urlParams = new URLSearchParams(window.location.search);
+     // Use the selectedTag in your page
+        var selectedTag;
+
+
+if (selectedTag) {
+      selectedTag = urlParams.get('tag');
+} else {
+    selectedTag = "ebony";
+}
+
+
+
       window.which = "play2";
 
         var offset = 0;
@@ -211,13 +225,13 @@ topp2.style.opacity = '1';
 
      function getJSON(offset, tag, arg) {
          
-let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&tag=ebony&gender=f&offset=${offset}`;
+let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectedTag}&offset=${offset}`;
  if (arg && arg.length > 1) {
- url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&tag=ebony&gender=f&offset=${offset}&tag=${arg}`;
+ url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${arg}`;
  }
     if (tag) {
         
-        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&tag=ebony&gender=f&offset=${offset}&tag=${tag}`;
+        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${tag}`;
     }
         
     fetch(url)
@@ -246,6 +260,29 @@ var countsArray = data.results.map(function(username, index) {
   
 
             var usernameElement = document.getElementById('username');
+
+
+
+var clickableDivs = usernameElement.querySelectorAll('.clickable');
+
+clickableDivs.forEach(function(div) {
+    div.addEventListener('click', function(event) {
+        // Remove the red color from all usernames
+        clickableDivs.forEach(function(otherDiv) {
+            otherDiv.style.color = 'white';
+        });
+
+        // Change the color of the clicked username to red
+        div.style.color = 'red';
+        // ... (your existing code)
+    });
+});
+
+
+
+
+
+            
             var divElement = document.getElementById("myDiv");
             
            // divElement.innerHTML = '';
@@ -604,7 +641,7 @@ clearUsernames();
 playerContainer.click();
 */
 
-apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&tag=ebony&gender=f";
+apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f"+"&tag="+selectedTag;
 
 fetch(apiUrl)
   .then(response => response.json())
