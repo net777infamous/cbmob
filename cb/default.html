@@ -34,6 +34,8 @@
                 .sort((a, b) => {
                    if (a === '#default') return -1; // Ensure #default is at the top
                     if (b === '#default') return 1; // Ensure #default is at the top
+                     if (a === '#favorites') return -1; // Ensure #default is at the top
+                    if (b === '#favorites') return 1; // Ensure #default is at the top
                     return a.localeCompare(b);
                 });
 
