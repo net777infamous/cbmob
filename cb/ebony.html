@@ -309,12 +309,20 @@ clickableDivs.forEach(function(div) {
             var divElement = document.getElementById("myDiv");
             
            // divElement.innerHTML = '';
-       if (selectTag == "favorites") {
+     if (selectTag == "favorites") {
   var favMod = localStorage.getItem("mobFav");
   var favArr = favMod ? favMod.split(",") : [];
-  
+
+  // Define headers
+  var headers = new Headers();
+  headers.append("Referer", referer);
+  headers.append("X-Requested-With", "XMLHttpRequest");
+
   // Use Promise.all to check response status for all usernames in favArr
-  Promise.all(favArr.map(username => fetch(`https://cbjpeg.stream.highwebmedia.com/stream?room=${username}`)
+  Promise.all(favArr.map(username => fetch(`https://cbjpeg.stream.highwebmedia.com/stream?room=${username}`, {
+    method: 'GET',
+    headers: headers  // Set headers here
+  })
     .then(response => {
       if (response.status === 200) {
         return username;
@@ -340,6 +348,7 @@ clickableDivs.forEach(function(div) {
     }).join("");
   });
 }
+
 
            
             else{
