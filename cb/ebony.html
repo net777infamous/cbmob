@@ -413,28 +413,40 @@ return
 zButton1.onclick = function () {
   var favMod = localStorage.getItem("mobFav");
   var favArr = favMod ? favMod.split(",") : [];
-  
+
   if (!favArr.includes(clickedUsername)) {
     favArr.push(String(clickedUsername));
     localStorage.setItem("mobFav", favArr.join(","));
     alert("Added to favorites");
   } else {
-    alert("Already in favorites");
+    var indexToRemove = favArr.indexOf(clickedUsername);
+    if (indexToRemove !== -1) {
+      favArr.splice(indexToRemove, 1);
+      localStorage.setItem("mobFav", favArr.join(","));
+      alert("Removed from favorites");
+    }
   }
 };
 
-                    zButton2.onclick = function () {
+
+zButton2.onclick = function () {
   var favMod = localStorage.getItem("mobFav");
   var favArr = favMod ? favMod.split(",") : [];
-  
+
   if (!favArr.includes(clickedUsername)) {
     favArr.push(String(clickedUsername));
     localStorage.setItem("mobFav", favArr.join(","));
     alert("Added to favorites");
   } else {
-    alert("Already in favorites");
+    var indexToRemove = favArr.indexOf(clickedUsername);
+    if (indexToRemove !== -1) {
+      favArr.splice(indexToRemove, 1);
+      localStorage.setItem("mobFav", favArr.join(","));
+      alert("Removed from favorites");
+    }
   }
 };
+
 
                     
                  //   var xviews = event.currentTarget.getAttribute('vcount');
