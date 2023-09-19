@@ -223,7 +223,8 @@ topp2.style.opacity = '1';
 
      function getJSON(offset, tag, arg) {
          
-let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectedTag}&offset=${offset}`;
+if(selectTag !== "#") {let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`};
+         else {let url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectedTag}&offset=${offset}`};
  if (arg && arg.length > 1) {
  url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${arg}`;
  }
@@ -639,7 +640,10 @@ clearUsernames();
 playerContainer.click();
 */
 
-apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f"+"&tag="+selectedTag;
+//apiUrl = "https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f"+"&tag="+selectedTag;
+
+            if(selectTag !== "#") {let apiUrl = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f`};
+         else {let apiUrl = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=2&gender=f&tag=${selectedTag}`};
 
 fetch(apiUrl)
   .then(response => response.json())
