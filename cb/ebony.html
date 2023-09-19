@@ -309,45 +309,22 @@ clickableDivs.forEach(function(div) {
             var divElement = document.getElementById("myDiv");
             
            // divElement.innerHTML = '';
-     if (selectTag == "favorites") {
-  var favMod = localStorage.getItem("mobFav");
-  var favArr = favMod ? favMod.split(",") : [];
+         if (selectTag == "favorites") {
 
-  // Define headers
-  var headers = new Headers();
-  headers.append("Referer", referer);
-  headers.append("X-Requested-With", "XMLHttpRequest");
+                var favMod = localStorage.getItem("mobFav");
+var favArr = favMod ? favMod.split(",") : [];
 
-  // Use Promise.all to check response status for all usernames in favArr
-  Promise.all(favArr.map(username => fetch(`https://cbjpeg.stream.highwebmedia.com/stream?room=${username}`, {
-    method: 'GET',
-    headers: headers  // Set headers here
-  })
-    .then(response => {
-      if (response.status === 200) {
-        return username;
-      } else {
-        return null; // Exclude usernames with non-200 response
-      }
-    })
-  ))
-  .then(filteredUsernames => {
-    // filteredUsernames will contain usernames with successful response status (200)
-
-    // Remove null values from the filteredUsernames
-    filteredUsernames = filteredUsernames.filter(username => username !== null);
-
-    // Update usernameElement with filteredUsernames
-    usernameElement.innerHTML = filteredUsernames.map(username => {
-      var fontSize = (username.length > 10) ? '12px' : '18px';
-      return `
-        <div class="clickable" userinfo="${username}">
-          <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
-          <div style="font-size: ${fontSize};">${username}</div>
-        </div>`;
-    }).join("");
-  });
-}
+usernameElement.innerHTML = favArr.map(function(username) {
+  var fontSize = (username.length > 10) ? '12px' : '18px';
+  return `
+    <div class="clickable" userinfo="${username}">
+      <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+      <div style="font-size: ${fontSize};">${username}</div>
+    </div>`;
+}).join("");
+//return
+                
+            }
 
 
            
