@@ -271,12 +271,19 @@ topp2.style.opacity = '1';
       
 let url;
 
+let url2
+
 if (selectTag == "default") {
     url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
 } else {
     url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag}&offset=${offset}`;
 }
 
+         if (selectTag2 == "default") {
+    url2 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
+} else {
+    url2 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag2}&offset=${offset}`;
+}
          /*
 
  if (arg && arg.length > 1) {
@@ -287,15 +294,34 @@ if (selectTag == "default") {
         url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${tag}`;
     }
         */
-         
-    fetch(url)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            var usernames = data.results.map(function(result) {
-                return result.username;
-            });
+     let usernames = [];  // Initialize usernames as an empty array
+
+fetch(url2)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    var usernames2 = data.results.map(function(result) {
+      return result.username;
+    });
+    
+    // Concatenate usernames2 with usernames
+    usernames = usernames.concat(usernames2);
+  }); 
+
+fetch(url)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    var usernames1 = data.results.map(function(result) {
+      return result.username;
+    });
+    
+    // Concatenate usernames1 with the existing usernames
+    usernames = usernames.concat(usernames1);
+
+
             
             /*
             var locations = data.results.map(function(result) {
