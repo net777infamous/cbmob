@@ -389,35 +389,102 @@ videoElement2.appendChild(topp2);
                 
                 div.addEventListener('click', function(event) {
 
+
+
+
+   if (!player.muted() && !player2.muted()) {
+    // Both players are unmuted
+return
+} else if (!player.muted()) {
+    // Only player 1 is unmuted
+    window.which = "play2";
+} else if (!player2.muted()) {
+    // Only player 2 is unmuted
+    window.which = "play1";
+} else {
+    // Both players are muted
+   if (window.which == "play1"){
+       window.which = "play2"
+
+   }
+                                 else if (window.which == "play2"){
+                                     window.which = "play1"
+
+                                 }
+                
+}
+                    
+                 //   var clickedLoc = event.currentTarget.getAttribute('data-location');
+                    var clickedUsername = event.currentTarget.getAttribute('userinfo');
+
+
+
+zButton1.onclick = function () {
+  var favMod = localStorage.getItem("mobFav");
+  var favArr = favMod ? favMod.split(",") : [];
+
+  if (!favArr.includes(clickedUsername)) {
+    favArr.push(String(clickedUsername));
+    localStorage.setItem("mobFav", favArr.join(","));
+    alert("Added to favorites");
+  } else {
+    var indexToRemove = favArr.indexOf(clickedUsername);
+    if (indexToRemove !== -1) {
+      favArr.splice(indexToRemove, 1);
+      localStorage.setItem("mobFav", favArr.join(","));
+      alert("Removed from favorites");
+    }
+  }
+};
+
+
+zButton2.onclick = function () {
+  var favMod = localStorage.getItem("mobFav");
+  var favArr = favMod ? favMod.split(",") : [];
+
+  if (!favArr.includes(clickedUsername)) {
+    favArr.push(String(clickedUsername));
+    localStorage.setItem("mobFav", favArr.join(","));
+    alert("Added to favorites");
+  } else {
+    var indexToRemove = favArr.indexOf(clickedUsername);
+    if (indexToRemove !== -1) {
+      favArr.splice(indexToRemove, 1);
+      localStorage.setItem("mobFav", favArr.join(","));
+      alert("Removed from favorites");
+    }
+  }
+};
+
+
+        
+
+                  if (window.which == "play1"){  
+                    player.src([{
+                        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
+                        type: 'application/x-mpegURL'
+                    }]);
+                    player.play();
+                 //   window.which = "play2"
+                  }
+
+                    else if (window.which == "play2"){  
+
+                    player2.src([{
+                        src: 'https://edge8-hel.live.mmcdn.com/live-hls/amlst:' + clickedUsername + '/playlist.m3u8',
+                        type: 'application/x-mpegURL'
+                    }]);
+                    player2.play(); 
+                   // window.which = "play1"
+                    }
+                    
+
                    
 
                 });
 
 
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       
