@@ -168,7 +168,7 @@ if (urlParams.has('tag')) {
 } else {
     selectTag = "default";
 }*/
-
+/*
         var selectTags = [];
 var selectTag;
         var selectTag2;
@@ -188,6 +188,26 @@ if (selectTags.length === 0) {
     selectTags.push("default");
   //  return
 }
+        */
+
+        var selectTags = [];
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.has('tag')) {
+    selectTags = urlParams.getAll('tag');
+    alert(selectTags);
+}
+
+if (selectTags.length === 0) {
+    selectTags.push("default");
+}
+
+// Dynamically create variables selectTag, selectTag2, etc. based on the number of selectTags
+for (var i = 0; i < selectTags.length; i++) {
+    window['selectTag' + (i + 1)] = selectTags[i];
+}
+
 
 
       window.which = "play2";
