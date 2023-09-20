@@ -158,7 +158,7 @@
 
     </style>
     <script>
-
+/*
 var selectTag;
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -167,6 +167,21 @@ if (urlParams.has('tag')) {
     selectTag = urlParams.get('tag');
 } else {
     selectTag = "default";
+}*/
+
+        var selectTags = [];
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.has('tag')) {
+    selectTags = urlParams.getAll('tag');
+    alert (selectTags)
+    return
+}
+
+if (selectTags.length === 0) {
+    selectTags.push("default");
+    return
 }
 
 
