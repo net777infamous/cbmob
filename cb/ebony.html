@@ -282,9 +282,13 @@ topp2.style.opacity = '1';
             
 
         var counts = [];
+        
 
  function getJSON(offset, tag, arg) {
-     let usernames = []; 
+  let usernames = [];
+
+  // Create an array to hold all the fetch promises
+  let fetchPromises = [];
 
   for (var i = 0; i < selectTags.length; i++) {
     let url;
@@ -295,31 +299,34 @@ topp2.style.opacity = '1';
       url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${window['selectTag' + (i + 1)]}&offset=${offset}`;
     }
 
-    fetch(url)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        var usernamesForTag = data.results.map(function(result) {
-          return result.username;
-        });
+    // Push the fetch promise to the array
+    fetchPromises.push(
+      fetch(url)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          var usernamesForTag = data.results.map(function (result) {
+            return result.username;
+          });
 
-        // Concatenate usernamesForTag with the existing usernames
-        usernames = usernames.concat(usernamesForTag);
-
-        // Check if this is the last fetch request
-        if (i === selectTags.length - 1) {
-          // All fetch requests are completed, you can work with the 'usernames' array here
-          console.log(usernames);
-          // You can perform any additional processing or rendering here
-        }
-      })
-      .catch(function(error) {
-        console.error('Error:', error);
-      });
+          // Concatenate usernamesForTag with the existing usernames
+          usernames = usernames.concat(usernamesForTag);
+        })
+        .catch(function (error) {
+          console.error('Error:', error);
+        })
+    );
   }
-  alert(usernames);
+
+  // Use Promise.all to wait for all promises to resolve
+  Promise.all(fetchPromises).then(function () {
+    // All fetch requests are completed, you can work with the 'usernames' array here
+    console.log(usernames);
+    alert(usernames); // You can perform any additional processing or rendering here
+  });
 }
+
 
 
 
