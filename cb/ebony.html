@@ -346,7 +346,7 @@ fetch(url)
     // Concatenate usernames1 with the existing usernames
     usernames = usernames.concat(usernames1);
     */
-         for (var i = 0; i < selectTags.length; i++) {
+        for (var i = 0; i < selectTags.length; i++) {
     let url;
 
     if (window['selectTag' + (i + 1)] == "default") {
@@ -367,6 +367,16 @@ fetch(url)
         // Concatenate usernamesForTag with the existing usernames
         usernames = usernames.concat(usernamesForTag);
 
+        // Check if this is the last fetch request
+        if (i === selectTags.length - 1) {
+            // All fetch requests are completed, you can work with the 'usernames' array here
+            console.log(usernames);
+            // You can perform any additional processing or rendering here
+        }
+      })
+      .catch(function(error) {
+        console.error('Error:', error);
+      });
 }
 
 
@@ -622,9 +632,11 @@ player2.on('error', function (e) {
                 });
             }
         })
+         /*
         .catch(function(error) {
             console.log('Error:', error);
         });
+        */
 }
 
            function previous2() {
