@@ -257,11 +257,44 @@ topp2.style.opacity = '1';
      function getJSON(offset, tag, arg) {
 
 
+var allUsernames = [];
+var fetchPromises = [];
+
+// Construct the URL with multiple tags
+var url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
+
+// Check if there are tags to add
+if (selectTags.length > 0) {
+  var tagsParam = selectTags.map(tag => `tag=${tag}`).join('&');
+  url += '&' + tagsParam;
+}
+
+var fetchPromise = fetch(url)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    var usernames = data.results.map(function(result) {
+      return result.username;
+    });
+
+    allUsernames = allUsernames.concat(usernames);
+  })
+  .catch(function(error) {
+    console.error('Error:', error);
+  });
+
+fetchPromises.push(fetchPromise);
+
+Promise.all(fetchPromises)
+  .then(function() {
+    document.body.innerHTML = allUsernames.join(', ');
+  });
 
 
 
 
-         
+    /*     
       
 let url;
 
@@ -300,7 +333,7 @@ var count = data.count; // Store the count in a variable
 var countsArray = data.results.map(function(username, index) {
            return count[index]; 
 });
-
+*/
             
   
 
