@@ -283,31 +283,15 @@ topp2.style.opacity = '1';
 
         var counts = [];
 
-     function getJSON(offset, tag, arg) {
-      
-let url;
+   function getJSON(offset, tag, arg) {
 
-let url2
-
-if (selectTag1 == "default") {
-    url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
-} else {
-    url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag1}&offset=${offset}`;
-}
-
-         if (selectTag2 == "default") {
-    url2 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
-} else {
-    url2 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag2}&offset=${offset}`;
-}
-      
-        for (var i = 0; i < selectTags.length; i++) {
+  for (var i = 0; i < selectTags.length; i++) {
     let url;
 
     if (window['selectTag' + (i + 1)] == "default") {
-        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
+      url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
     } else {
-        url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${window['selectTag' + (i + 1)]}&offset=${offset}`;
+      url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${window['selectTag' + (i + 1)]}&offset=${offset}`;
     }
 
     fetch(url)
@@ -318,23 +302,24 @@ if (selectTag1 == "default") {
         var usernamesForTag = data.results.map(function(result) {
           return result.username;
         });
-        
+
         // Concatenate usernamesForTag with the existing usernames
         usernames = usernames.concat(usernamesForTag);
 
         // Check if this is the last fetch request
         if (i === selectTags.length - 1) {
-            // All fetch requests are completed, you can work with the 'usernames' array here
-            console.log(usernames);
-            // You can perform any additional processing or rendering here
+          // All fetch requests are completed, you can work with the 'usernames' array here
+          console.log(usernames);
+          // You can perform any additional processing or rendering here
         }
       })
       .catch(function(error) {
         console.error('Error:', error);
       });
+  }
+  alert(usernames);
 }
-         alert(usernames)
-     }
+
 
             
             /*
