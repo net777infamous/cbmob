@@ -291,6 +291,12 @@ topp2.style.opacity = '1';
   let fetchPromises = [];
 
   for (var i = 0; i < selectTags.length; i++) {
+
+if (selectTags.includes("favorites")) {
+ alert("bhiddd")
+    return
+} 
+
     let url;
 
     if (window['selectTag' + (i + 1)] == "default") {
