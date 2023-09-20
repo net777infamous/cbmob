@@ -176,12 +176,12 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('tag')) {
     selectTags = urlParams.getAll('tag');
     alert (selectTags)
-    return
+  //  return
 }
 
 if (selectTags.length === 0) {
     selectTags.push("default");
-    return
+  //  return
 }
 
 
