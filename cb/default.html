@@ -88,6 +88,18 @@
 
         // Add an event listener to the search input
         tagSearchInput.addEventListener('input', updateTagList);
+        
+        // Add an event listener to the Generate URL button
+        generateUrlButton.addEventListener('click', function(event) {
+            // Prevent the default behavior of the button (linking to the URL)
+            event.preventDefault();
+            
+            // Get the generated URL
+            const url = generateUrlButton.href;
+            
+            // Redirect to the generated URL
+            window.location.href = url;
+        });
     </script>
 </body>
 </html>
