@@ -361,11 +361,11 @@ usernameElement.innerHTML = favArr.map(function(username) {
             usernameElement.innerHTML = usernames.map(function(username, index) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
                 //     <div class="clickable" data-location="${locations[index]}" userinfo="${username}" nfollow="${nfollowers[index]}">
+                //            <div style="display: none;">${locations[index]}</div>
                 return `
                     <div class="clickable" userinfo="${username}">
                         <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
                         <div style="font-size: ${fontSize};">${username}</div>
-                        <div style="display: none;">${locations[index]}</div>
                     </div>`;
             }).join("");
             }
