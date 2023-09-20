@@ -285,6 +285,11 @@ topp2.style.opacity = '1';
         
 
  function getJSON(offset, tag, arg) {
+     
+     var divElement = document.getElementById("myDiv");
+
+
+var usernameElement = document.getElementById('username');
   let usernames = [];
 
   // Create an array to hold all the fetch promises
@@ -293,7 +298,20 @@ topp2.style.opacity = '1';
   for (var i = 0; i < selectTags.length; i++) {
 
 if (selectTags.includes("favorites")) {
- alert("bhiddd")
+    
+ var favMod = localStorage.getItem("mobFav");
+var favArr = favMod ? favMod.split(",") : [];
+
+usernameElement.innerHTML = favArr.map(function(username) {
+  var fontSize = (username.length > 10) ? '12px' : '18px';
+  return `
+    <div class="clickable" userinfo="${username}">
+      <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
+      <div style="font-size: ${fontSize};">${username}</div>
+    </div>`;
+}).join("");
+
+    
     return
 } 
 
@@ -332,10 +350,6 @@ if (selectTags.includes("favorites")) {
    // alert(usernames); 
       // You can perform any additional processing or rendering here
 
-var divElement = document.getElementById("myDiv");
-
-
-var usernameElement = document.getElementById('username');
 
  usernameElement.innerHTML = usernames.map(function(username, index) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
