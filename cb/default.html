@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Select a tag</title>
+    <title>Select Tags</title>
 </head>
 <body>
-    <p>Select a tag:</p>
+    <p>Select tags:</p>
     <input type="text" id="tagSearch" placeholder="Search tags">
     <ul id="tagList">
         <!-- Tags will be dynamically added here -->
     </ul>
+    <button id="generateUrlButton" style="display: none;">Generate URL</button>
 
     <script>
         // Your array of tags
-        let tagsArray = ["#default", "#favorites","#18","#19","#asian","#bigboobs","#ebony","#mature","#latina","#milf","#hairy","#anal","#new","#squirt","#bbw","#milk","#smalltits","#teen","#skinny","#pantyhose","#feet","#bigass","#fuckmachine","#pregnant","#german","#deepthroat","#young","#mistress","#shy","#redhead","#french","#smoke","#british","#curvy","#bigpussylips","#cc","#indian","#ahegao","#natural","#pinay","#goth","#muscle","#cosplay","#nonude","#lovense","#bdsm","#blonde","#petite","#femdom","#heels","#daddy","#joi","#hairyarmpits","#dirty","#saliva","#latex","#bigclit","#puffynipples","#slave","#bigtits","#mommy","#sph","#lesbian","#submissive","#hairypussy","#stockings","#atm","#cute","#bignipples","#fit","#tattoo","#strapon","#ukraine","#cei","#findom","#chubby","#cuckold","#braces","#daddysgirl","#cum","#bush","#office","#dirtytalk","#italian","#anime","#slut","#humiliation","#flexible","#nasty","#dutch","#sissy","#blowjob","#leggings","#piercing","#footjob","#glasses","#arab","#pawg","#gaming","#tease","#spit","#twerk","#bbc","#dance","#longhair","#aussie","#shorthair","#fitness","#tall","#socks","#fetish","#pussy","#ass","#nonnude","#lush","#pvt","#bigpussy","#schoolgirl","#legs","#gamer","#colombia","#party","#turkish","#roleplay","#balloons","#slim","#russian","#cameltoe","#brunette","#student","#chastity","#hentai","#dildo","#leather","#kinky","#leagueoflegends","#horny","#messy","#goddess","#tomboy","#domi","#nylon","#wifematerial","#panties","#boots","#footfetish","#tiny","#armpits","#korean","#japanese","#valorant","#ssbbw","#creamy","#smoking","#naked","#smallboobs","#erotic","#asmr","#domination","#tattoos","#muscles","#abs","#pegging","#sexy","#shaved","#belly","#redhair","#dp","#bondage","#amputee","#creampie","#boobs","#athletic","#couple","#bigbelly","#longlegs","#piercings","#jeans","#bigcock","#tits","#wet","#sloppy","#bigdildo","#ginger","#porn","#cumshow","#sensual","#private","#ohmibod","#lingerie","#hugeboobs","#oil","#small","#nora","#asshole","#latin","#thick","#chat","#curly","#girlnextdoor","#dominatrix","#orgasm","#yoga","#yoga","#germany","#femboy","#bigtoys","#interactivetoy","#control","#love","#strip","#smoker","#black","#fat","#bigtoy","#masturbation","#college","#naughty","#dominant","#fuck","#naturaltits","#whore","#longtongue","#biglips","#english","#pornstar","#little","#tights","#naturalboobs","#masturbate","#hush","#master","#nipples","#colombiana","#american","#twink","#lovensecontrol","#toes","#talk","#soles","#edging","#pierced","#france","#canadian","#beauty","#nolush","#fingering","#dildoplay","#assplay","#makemecum","#chill","#tipgoal","#innocent","#mixed","#ink","#sub","#dom","#booty","#girl","#big","#bigboob","#recommended","#sex","#babe","#smile","#trimmed","#toys","#cutie","#seductive","#naturalgirls","#newgirl","#bigbutt","#thin","#bignaturalboobs","#tanlines","#flirt","#twerking","#blond","#nature","#show","#pierce","#beautiful","#pussyplay","#ride","#vacuum","#hot","#fingerass","#ridedildo","#play","#sexmachine","#creamypussy","#cowgirl","#colorhair","#teens","#me","#cream","#sweet","#nude","#splits","#wetpussy","#feets","#roll","#plug","#plug","#sport","#toy","#niceass","#voyeur","#foot","#spank","#talkdirty","#lushcontrol","#blueeyes","#brat","#pinkpussy","#password","#passion","#bj","#doggy","#african","#rust","#longnails","#blue","#wheel","#smiling","##","#creamycum","#sexyboobs","#sexygirl","#cuckolding","#latins","#hugetits","#skirt","#rollthedice","#curve","#newmodel","#hotgirl","#interactive","#privateshow","#sexytits","#nice","#girlfriendmaterial","#amateur","#fucking","#swimmingpool","#goodvibes","#rimworld","#emo","#showboobs","#phatass","#pvtopen","#single","#welcome","#blondegirl","#tickle","#bigsquirt","#snap","#hometogether","#smallbreasts","#sexyass","#showcum","#sneakers","#outside","#pink","#asia","#girls","#poledance","#milkyboobs","#secretary","#bigbooty","#singlemom","#freaky","#analtoys","#balls","#playful","#nomakeup","#gym","#sissification","#topless","#bisexual","#blondie","#cougar","#brackets","#hardnipples","#work","#tittyfuck","#obedient","#dress","#domi","#striptease","#smalltitties","#eyes","#moan","#hair","#rock","#feed","#littletits","#straight","#butt","#foreplay","#septum","#fullbush","#nipplepiercing","#dress","#rock","#wild","#penetration","#happy","#riding","#cougar","#brackets","#fountain","#balls","#sexylatina","#analtoys","#hornywife","#bigbreasts","#domi","#hotbody","#smallass","#dolce","#ready","#lovenselush","#hairyarmpit","#pvtshow","#hotpussy","#pvton","#busty","#funny","#bunny","#nudeinpvt","#hair","#single","#moan","#body","#spanks","#naturalgirl","#slime","#underwear","#blackhair","#fingers","#smart","#candy","#thickthighs","#butt","#spanking","#chatting","#model","#fullbush","#cutesmile","#exotic","#oilshow","#silly","#barbie","#bubblebutt","#shave","#feel","#joy","#bi","#talkative","#breasts","#lushon","#glass","#milfs","#hotmom","#uncut","#fuckass","#hetero","#double","#years","#medium","#vape","#breast","#classy","#gay","#bigdick","#curved","#facial","#bald","#sucktits","#tummy","#latino","#dominate","#sexyeyes","#messydeepthroat","#exercise","#pink","#vibe","#lovenseon","#today","#cfnm","#nakedshow","#finger","#gloves","#pinkhair","#home","#boob","#madure","#curves","#lesbians","#rubclit","#showfeet","#passwordshow","#darkprincess","#latinas","#vibe","#friend","#messydeepthroat","#pink","#lovenseon","#goals","#camcam","#flash","#singer","#feetfetish","#slender","#sweetheart","#fresh","#fatpussy","#crazy","#guitar","#relax","#shake","#teengirl","#fingerpussy","#sucknipples"];
-        
+        let tagsArray = ["#default", "#favorites", "#18", "#19", "#asian"];
 
         // Get the ul element where you want to add the tags
         const tagList = document.getElementById('tagList');
 
         // Get the search input element
         const tagSearchInput = document.getElementById('tagSearch');
+
+        // Get the generate URL button element
+        const generateUrlButton = document.getElementById('generateUrlButton');
 
         // Function to update the displayed tags based on the search input
         function updateTagList() {
@@ -32,10 +35,10 @@
             const filteredTags = tagsArray
                 .filter(tag => tag !== '#' && tag.toLowerCase().includes(searchQuery))
                 .sort((a, b) => {
-                   if (a === '#default') return -1; // Ensure #default is at the top
+                    if (a === '#default') return -1; // Ensure #default is at the top
                     if (b === '#default') return 1; // Ensure #default is at the top
-                     if (a === '#favorites') return -1; // Ensure #default is at the top
-                    if (b === '#favorites') return 1; // Ensure #default is at the top
+                    if (a === '#favorites') return -1; // Ensure #favorites is at the top
+                    if (b === '#favorites') return 1; // Ensure #favorites is at the top
                     return a.localeCompare(b);
                 });
 
@@ -43,14 +46,41 @@
                 const tagWithoutHash = tag.slice(1);
 
                 const li = document.createElement('li');
+                const checkbox = document.createElement('input');
                 const a = document.createElement('a');
 
-                a.setAttribute('href', `https://net777infamous.github.io/cbmob/cb/ebony.html?tag=${tagWithoutHash}`);
-                a.textContent = tagWithoutHash;
+                checkbox.type = 'checkbox';
+                checkbox.name = 'tags';
+                checkbox.value = tagWithoutHash;
 
+                a.textContent = tagWithoutHash;
+                a.href = `https://net777infamous.github.io/cbmob/cb/ebony.html?tag=${tagWithoutHash}`;
+
+                li.appendChild(checkbox);
                 li.appendChild(a);
                 tagList.appendChild(li);
             });
+
+            // Add event listener to checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateUrl);
+            });
+        }
+
+        // Function to update the URL based on selected checkboxes
+        function updateUrl() {
+            const selectedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedTags = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
+
+            if (selectedTags.length > 0) {
+                const tagParameters = selectedTags.map(tag => `tag=${tag}`).join('&');
+                const url = `https://net777infamous.github.io/cbmob/cb/ebony.html?${tagParameters}`;
+                generateUrlButton.style.display = 'block';
+                generateUrlButton.href = url;
+            } else {
+                generateUrlButton.style.display = 'none';
+            }
         }
 
         // Initial tag list
