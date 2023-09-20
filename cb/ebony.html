@@ -171,12 +171,16 @@ if (urlParams.has('tag')) {
 
         var selectTags = [];
 var selectTag;
+        var selectTag2;
+        
+        
 const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.has('tag')) {
     selectTags = urlParams.getAll('tag');
     alert (selectTags)
     selectTag =selectTags [0];
+    selectTag2 =selectTags [1];
   //  return
 }
 
@@ -266,12 +270,14 @@ topp2.style.opacity = '1';
      
       
 let url;
-
+/*
 if (selectTag == "default") {
     url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
 } else {
     url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag}&offset=${offset}`;
 }
+*/
+         /*
 
  if (arg && arg.length > 1) {
  url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${arg}`;
@@ -280,7 +286,8 @@ if (selectTag == "default") {
         
         url = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=20&gender=f&offset=${offset}&tag=${tag}`;
     }
-        
+        */
+         /*
     fetch(url)
         .then(function(response) {
             return response.json();
@@ -289,6 +296,7 @@ if (selectTag == "default") {
             var usernames = data.results.map(function(result) {
                 return result.username;
             });
+            */
             /*
             var locations = data.results.map(function(result) {
                 return result.location;
@@ -304,6 +312,59 @@ var countsArray = data.results.map(function(username, index) {
            return count[index]; 
 });
 */
+         var usernames = []; // Initialize an empty array to store usernames
+
+// Define the URLs for both tags
+var url1, url2;
+
+if (selectTag == "default") {
+  url1 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
+} else {
+  url1 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag}&offset=${offset}`;
+}
+
+if (selectTag1 == "default") {
+  url2 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&offset=${offset}`;
+} else {
+  url2 = `https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=ypOeP&format=json&client_ip=172.70.54.110&tour=41Ea&limit=21&gender=f&tag=${selectTag1}&offset=${offset}`;
+}
+
+// Create promises for both requests
+var promise1 = fetch(url1)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    return data.results.map(function(result) {
+      return result.username;
+    });
+  });
+
+var promise2 = fetch(url2)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    return data.results.map(function(result) {
+      return result.username;
+    });
+  });
+
+// Use Promise.all to wait for both promises to resolve
+Promise.all([promise1, promise2])
+  .then(function(results) {
+    // Merge the results into the usernames array
+    usernames = usernames.concat(results[0], results[1]);
+
+    // Now you can work with the merged usernames array
+    console.log(usernames);
+  })
+  .catch(function(error) {
+    console.error('Error:', error);
+  });
+
+alert(usernames)
+         
             
   
 
