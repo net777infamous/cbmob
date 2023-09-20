@@ -289,7 +289,7 @@ if (selectTag == "default") {
             var usernames = data.results.map(function(result) {
                 return result.username;
             });
-            
+            /*
             var locations = data.results.map(function(result) {
                 return result.location;
             });
@@ -297,12 +297,13 @@ if (selectTag == "default") {
                 return result.num_followers;
                  
             });
+            
 var count = data.count; // Store the count in a variable
 
 var countsArray = data.results.map(function(username, index) {
            return count[index]; 
 });
-
+*/
             
   
 
@@ -359,8 +360,9 @@ usernameElement.innerHTML = favArr.map(function(username) {
                 }
             usernameElement.innerHTML = usernames.map(function(username, index) {
                 var fontSize = (username.length > 10) ? '12px' : '18px';
+                //     <div class="clickable" data-location="${locations[index]}" userinfo="${username}" nfollow="${nfollowers[index]}">
                 return `
-                    <div class="clickable" data-location="${locations[index]}" userinfo="${username}" nfollow="${nfollowers[index]}">
+                    <div class="clickable" userinfo="${username}">
                         <img class="thumbnail" src="https://cbjpeg.stream.highwebmedia.com/minifwap/${username}.jpg?f=${Date.now()}" alt="${username} Thumbnail">
                         <div style="font-size: ${fontSize};">${username}</div>
                         <div style="display: none;">${locations[index]}</div>
